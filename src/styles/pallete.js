@@ -23,15 +23,13 @@ export const theme = createTheme({
       10: "#FDFDFD",
       whiteFixed: "#FFFFFF",
     },
-    success: {
-      1: "#18794E",
-      2: "#CCEBD7",
-      3: "#DDF3E4",
-    },
-    alert: {
-      1: "#CD2B31",
-      2: "#FDD8D8",
-      3: "#FFE5E5",
+    feedback: {
+      success1: "#18794E",
+      success2: "#CCEBD7",
+      success3: "#DDF3E4",
+      alert1: "#CD2B31",
+      alert2: "#FDD8D8",
+      alert3: "#FFE5E5",
     },
   },
   typography: {

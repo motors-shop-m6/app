@@ -20,9 +20,6 @@ function App() {
         theme="light"
         transition={Slide}
       />
-      <div>
-        <div></div>
-      </div>
     </ThemeProvider>
   );
 }

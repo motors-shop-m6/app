@@ -8,6 +8,9 @@ function CustomButton(props) {
       variant={props.variant}
       sx={{
         color: props.color,
+        borderColor: props.borderColor,
+        bgcolor: props.bgcolor,
+        padding: props.padding,
       }}
     >
       {props.text}
@@ -16,3 +19,20 @@ function CustomButton(props) {
 }
 
 export default CustomButton;
+{
+  /* COMPONENT CALLOUT EXAMPLE
+  VARIANT can be: text, contained or outlined
+  SIZE can be: small, medium, larger
+  bgcolor means background-color
+  
+   <CustomButton
+  type="submit"
+  size="small"
+  variant="outlined"
+  color="brand.2"
+  borderColor="brand.2"
+  bgcolor="brand.4"
+  text="Text Button"
+  padding=".5rem"
+/>; */
+}

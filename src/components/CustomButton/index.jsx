@@ -11,6 +11,7 @@ function CustomButton(props) {
         borderColor: props.borderColor,
         bgcolor: props.bgcolor,
         padding: props.padding,
+        fontFamily: "'Inter', sans-serif",
       }}
     >
       {props.text}

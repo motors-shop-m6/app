@@ -9,20 +9,22 @@ export const buttonProps = {
   padding: ".8rem",
 };
 
-export const buttonWhite = {
-  color: "brand.2",
-  borderColor: "grey.4",
-  bgcolor: "brand.4",
-  padding: "1rem",
-};
-
-export const buttonLogin = {
+export const buttonTransparent = {
   type: "button",
   size: "small",
   variant: "outlined",
-  color: "grey.0",
+  color: "grey.2",
   borderColor: "grey.whiteFixed",
   bgcolor: "grey.whiteFixed",
-  text: "Fazer Login",
+  padding: ".8rem",
+};
+
+export const buttonTransparentOutlined = {
+  type: "button",
+  size: "small",
+  variant: "outlined",
+  color: "grey.2",
+  borderColor: "grey.6",
+  bgcolor: "grey.whiteFixed",
   padding: ".8rem",
 };

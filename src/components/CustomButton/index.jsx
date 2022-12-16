@@ -12,6 +12,10 @@ function CustomButton(props) {
         bgcolor: props.bgcolor,
         padding: props.padding,
         fontFamily: "'Inter', sans-serif",
+        "&:hover": {
+          textDecoration: props.underline,
+          borderColor: props.borderColorHover,
+        },
       }}
     >
       {props.text}

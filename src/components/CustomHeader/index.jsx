@@ -1,9 +1,90 @@
-import { AppBar, Toolbar, Stack, IconButton } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Stack,
+  IconButton,
+  Divider,
+  Drawer,
+  Box,
+  Typography,
+} from "@mui/material";
+import { useEffect, useState } from "react";
 import motors_shop_logo from "../../assets/motors_shop_logo.png";
-import { buttonLogin } from "../../styles/buttonProps";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useNavigate } from "react-router-dom";
+import {
+  buttonTransparent,
+  buttonTransparentOutlined,
+} from "../../styles/buttonProps";
 import CustomButton from "../CustomButton";
 
 function CustomHeader(props) {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerActive, setDrawerActive] = useState(
+    window.innerWidth > 750 ? false : true
+  );
+  const [screen, setScreen] = useState({
+    winWidth: window.innerWidth,
+    winHeight: window.innerHeight,
+  });
+
+  const navigate = useNavigate();
+
+  const screenWatcher = () => {
+    setScreen({
+      winWidth: window.innerWidth,
+      winHeight: window.innerHeight,
+    });
+  };
+
+  const screenChanger = () => {
+    if (screen.winWidth > 750) {
+      setDrawerActive(false);
+    } else {
+      setDrawerActive(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", screenWatcher);
+    window.addEventListener("resize", screenChanger);
+
+    return () => {
+      window.removeEventListener("resize", screenWatcher);
+      window.addEventListener("resize", screenChanger);
+    };
+  }, [screen]);
+
+  const cars = {
+    ...buttonTransparent,
+    text: "Carros",
+    borderColorHover: "transparent",
+    underline: "underline",
+  };
+  const motorcycle = {
+    ...buttonTransparent,
+    text: "Motos",
+    borderColorHover: "transparent",
+    underline: "underline",
+  };
+  const auction = {
+    ...buttonTransparent,
+    text: "Leilão",
+    borderColorHover: "transparent",
+    underline: "underline",
+  };
+  const login = {
+    ...buttonTransparent,
+    text: "Fazer Login",
+    borderColorHover: "transparent",
+    underline: "underline",
+  };
+  const register = {
+    ...buttonTransparentOutlined,
+    text: "Cadastrar",
+    borderColorHover: "brand.2",
+  };
+
   return (
     <AppBar
       position="static"
@@ -12,14 +93,55 @@ function CustomHeader(props) {
       }}
     >
       <Toolbar>
-        <Stack sx={{ flexGrow: 1 }}>
-          <img src={motors_shop_logo} width="100rem" />
-        </Stack>
-        <Stack sx={{ flexGrow: 1 }}>
-          <Stack spacing={3}>
-            <CustomButton {...buttonLogin} />
+        <Stack px={5} sx={{ flexGrow: 5, px: { md: 4, lg: 5 } }}>
+          <Stack
+            component="a"
+            onClick={() => {
+              navigate("/dashboard");
+            }}
+          >
+            <img src={motors_shop_logo} width="100rem" />
           </Stack>
         </Stack>
+        {drawerActive ? (
+          <>
+            <IconButton onClick={() => setDrawerOpen(true)}>
+              <MenuIcon />
+            </IconButton>
+            <Drawer
+              anchor="right"
+              open={drawerOpen}
+              onClose={() => setDrawerOpen(false)}
+            >
+              <Box
+                p={2}
+                width="15.625rem"
+                justifyContent="center"
+                textAlign="center"
+              >
+                <Typography variant="h4">Opções</Typography>
+                <Stack spacing={3} direction="column">
+                  <CustomButton {...cars} />
+                  <CustomButton {...motorcycle} />
+                  <CustomButton {...auction} />
+                  <CustomButton {...login} />
+                  <CustomButton {...register} />
+                </Stack>
+              </Box>
+            </Drawer>
+          </>
+        ) : (
+          <Stack sx={{ flexGrow: 1 }}>
+            <Stack spacing={3} direction="row">
+              <CustomButton {...cars} />
+              <CustomButton {...motorcycle} />
+              <CustomButton {...auction} />
+              <Divider orientation="vertical" flexItem />
+              <CustomButton {...login} />
+              <CustomButton {...register} />
+            </Stack>
+          </Stack>
+        )}
       </Toolbar>
     </AppBar>
   );

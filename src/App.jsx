@@ -2,6 +2,7 @@ import { ThemeProvider } from "@mui/material";
 import { theme } from "./styles/pallete";
 import { Slide, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import AppRoutes from "./routes";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         theme="light"
         transition={Slide}
       />
+      <AppRoutes />
     </ThemeProvider>
   );
 }

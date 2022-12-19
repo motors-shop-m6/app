@@ -2,7 +2,7 @@ import { Container, Box, Typography, Paper, IconButton } from "@mui/material";
 import motors_shop_logo_white from "../../assets/motors_shop_logo_white.png";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-function CustomFooter(props) {
+function CustomFooter() {
   const topFunction = () => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;

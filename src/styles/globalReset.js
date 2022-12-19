@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
     scroll-behavior: smooth;
   }
   body {
-    background-color: #121214;
+    //background-color: #121214;
   }
   a {
     text-decoration: none;

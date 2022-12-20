@@ -60,7 +60,7 @@ function CustomFooter() {
             display: "flex",
           }}
         >
-          <Typography variant="caption" color="initial">
+          <Typography variant="caption" color="white">
             © 2022 Todos os direitos reservados.
           </Typography>
         </Box>

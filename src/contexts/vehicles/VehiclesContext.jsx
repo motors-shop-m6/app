@@ -1,9 +1,9 @@
 import { createContext, useEffect, useState } from "react";
 import { api } from "../../api/api";
 
-export const VehiclesContext = createContext({ children });
+export const VehiclesContext = createContext({});
 
-function ProductsProvider({ children }) {
+function VehicleProvider({ children }) {
   const [vehicle, setVehicle] = useState({});
   const [loadingVehicle, setLoadingVehicle] = useState(true);
   const loadVehicle = () => {};
@@ -22,10 +22,10 @@ function ProductsProvider({ children }) {
   }, []);
 
   return (
-    <ProductsContext.Provider value={{ vehicle, loadingVehicle, loadVehicle }}>
+    <VehiclesContext.Provider value={{ vehicle, loadingVehicle, loadVehicle }}>
       {children}
-    </ProductsContext.Provider>
+    </VehiclesContext.Provider>
   );
 }
 
-export default ProductsProvider;
+export default VehicleProvider;

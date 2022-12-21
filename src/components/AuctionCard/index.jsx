@@ -16,6 +16,7 @@ export default function AuctionCard() {
   return (
     <Box
       sx={{
+        transition: "300ms ease-in-out",
         width: {
           xs: 328,
           sm: 328,
@@ -26,14 +27,15 @@ export default function AuctionCard() {
         height: {
           xs: 530,
           sm: 530,
-          md: 388,
-          lg: 388,
-          xl: 388,
+          md: 406,
+          lg: 406,
+          xl: 406,
         },
         background:
           "linear-gradient(180deg, rgba(0, 0, 0, 0.29) 0%, #000000 100%);",
         "&:hover": {
           backgroundColor: "#212529",
+          transition: "300ms ease-in-out",
           opacity: [0.9, 0.8, 0.7],
         },
       }}
@@ -140,6 +142,7 @@ export default function AuctionCard() {
             }}
           >
             <Typography
+              component="div"
               sx={{
                 fontSize: 16,
                 display: "flex",
@@ -245,8 +248,10 @@ export default function AuctionCard() {
           height: "61px",
           color: "#FFFFFF",
           backgroundColor: "#4529E6",
+          transition: "300ms ease-in-out",
           "&:hover": {
             backgroundColor: "#5126EA",
+            transition: "300ms ease-in-out",
           },
           display: "flex",
           justifyContent: "space-between",

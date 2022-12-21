@@ -28,3 +28,13 @@ export const buttonTransparentOutlined = {
   bgcolor: "grey.whiteFixed",
   padding: ".8rem",
 };
+
+export const buttonOutlinedDashboard = {
+  type: "button",
+  size: "medium",
+  variant: "outlined",
+  color: "grey.whiteFixed",
+  borderColor: "grey.whiteFixed",
+  bgcolor: "brand.2",
+  padding: ".7rem 4rem",
+};

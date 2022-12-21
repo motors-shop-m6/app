@@ -11,7 +11,6 @@ function CustomFooter() {
     <Paper
       sx={{
         marginTop: "calc(10% + 60px)",
-        position: "fixed",
         bottom: 0,
         width: "100%",
         border: 0,
@@ -75,6 +74,7 @@ function CustomFooter() {
         >
           <IconButton
             sx={{
+              color: "grey.whiteFixed",
               bgcolor: "grey.1",
               borderRadius: ".3rem",
               size: {

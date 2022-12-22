@@ -1,15 +1,22 @@
-import { Stack, Typography } from "@mui/material";
-import { useContext } from "react";
+import { Paper, Skeleton, Stack, Typography, Box } from "@mui/material";
+import { useContext, useEffect, useState } from "react";
 import AuctionCard from "../components/AuctionCard";
 import CustomButton from "../components/CustomButton";
 import CustomFooter from "../components/CustomFooter";
 import CustomHeader from "../components/CustomHeader";
+import CustomProduct from "../components/CustomProduct";
+import { VehiclesContext } from "../contexts/vehicles/VehiclesContext";
 import { buttonOutlinedDashboard } from "../styles/buttonProps";
 
 function Dashboard() {
-  //   const { vehicle, loadingVehicle } = useContext();
-  const carsButton = { ...buttonOutlinedDashboard, text: "Carros" };
-  const motorcyclesButton = { ...buttonOutlinedDashboard, text: "Motos" };
+  const { vehicles } = useContext(VehiclesContext);
+  const carsButton = { ...buttonOutlinedDashboard, text: "Carros", to: "cars" };
+  const motorcyclesButton = {
+    ...buttonOutlinedDashboard,
+    text: "Motos",
+    to: "motorcycles",
+  };
+
   return (
     <>
       <CustomHeader />
@@ -76,7 +83,7 @@ function Dashboard() {
           direction={{ xs: "column", sm: "column", md: "row" }}
           spacing={3}
         >
-          <CustomButton {...carsButton} />
+          <CustomButton onClick={() => {}} {...carsButton} />
           <CustomButton {...motorcyclesButton} />
         </Stack>
       </Stack>
@@ -111,7 +118,9 @@ function Dashboard() {
         padding="0 1rem 0 3rem"
       >
         <Stack>
-          <Typography variant="h5">Carros</Typography>
+          <Typography id="cars" variant="h5">
+            Carros
+          </Typography>
         </Stack>
         <Stack
           spacing={5}
@@ -119,7 +128,117 @@ function Dashboard() {
           width="100%"
           height="90%"
           overflow="auto"
-        ></Stack>
+        >
+          {vehicles === null ? (
+            <>
+              <Skeleton width="20rem" height="25rem" variant="rectangular" />
+              <Skeleton width="20rem" height="25rem" variant="rectangular" />
+              <Skeleton width="20rem" height="25rem" variant="rectangular" />
+              <Skeleton width="20rem" height="25rem" variant="rectangular" />
+            </>
+          ) : vehicles.length > 0 ? (
+            vehicles.map((item) => (
+              <CustomProduct
+                key={item.id}
+                urlImg={item.coverImage[0].image}
+                nameVehicle={item.title}
+                description={item.description}
+                nameSeller="Caza caza"
+                valueKM={item.km}
+                year={item.year}
+                price={item.price}
+              />
+            ))
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                bgcolor: "grey.6",
+                borderRadius: ".7rem",
+                "& > :not(style)": {
+                  m: 1,
+                  width: 230,
+                  height: 200,
+                },
+              }}
+            >
+              <Typography
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                textAlign="center"
+                variant="h5"
+              >
+                Não há nenhum anúncio até o momento! :)
+              </Typography>
+            </Box>
+          )}
+        </Stack>
+      </Stack>
+      <Stack
+        mt={10}
+        mb={20}
+        spacing={4}
+        direction="column"
+        padding="0 1rem 0 3rem"
+      >
+        <Stack>
+          <Typography id="motorcycles" variant="h5">
+            Motos
+          </Typography>
+        </Stack>
+        <Stack
+          spacing={5}
+          direction="row"
+          width="100%"
+          height="90%"
+          overflow="auto"
+        >
+          {vehicles === null ? (
+            <>
+              <Skeleton width="20rem" height="25rem" variant="rectangular" />
+              <Skeleton width="20rem" height="25rem" variant="rectangular" />
+              <Skeleton width="20rem" height="25rem" variant="rectangular" />
+              <Skeleton width="20rem" height="25rem" variant="rectangular" />
+            </>
+          ) : vehicles.length > 0 ? (
+            vehicles.map((item) => (
+              <CustomProduct
+                key={item.id}
+                urlImg={item.coverImage[0].image}
+                nameVehicle={item.title}
+                description={item.description}
+                nameSeller="Caza caza"
+                valueKM={item.km}
+                year={item.year}
+                price={item.price}
+              />
+            ))
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                bgcolor: "grey.6",
+                borderRadius: ".7rem",
+                "& > :not(style)": {
+                  m: 1,
+                  width: 230,
+                  height: 200,
+                },
+              }}
+            >
+              <Typography
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                textAlign="center"
+                variant="h5"
+              >
+                Não há nenhum anúncio até o momento! :)
+              </Typography>
+            </Box>
+          )}
+        </Stack>
       </Stack>
       <CustomFooter />
     </>

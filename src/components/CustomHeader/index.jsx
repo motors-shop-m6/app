@@ -60,12 +60,14 @@ function CustomHeader(props) {
     text: "Carros",
     borderColorHover: "transparent",
     underline: "underline",
+    to: "cars",
   };
   const motorcycle = {
     ...buttonTransparent,
     text: "Motos",
     borderColorHover: "transparent",
     underline: "underline",
+    to: "motorcycles",
   };
   const auction = {
     ...buttonTransparent,

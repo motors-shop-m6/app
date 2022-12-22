@@ -11,8 +11,6 @@ function CustomFooter() {
     <Paper
       sx={{
         marginTop: "calc(10% + 60px)",
-        width: "100%",
-        position: "fixed",
         bottom: 0,
         width: "100%",
         border: 0,
@@ -61,7 +59,7 @@ function CustomFooter() {
             display: "flex",
           }}
         >
-          <Typography variant="caption" color="initial">
+          <Typography variant="caption" color="white">
             © 2022 Todos os direitos reservados.
           </Typography>
         </Box>
@@ -76,6 +74,7 @@ function CustomFooter() {
         >
           <IconButton
             sx={{
+              color: "grey.whiteFixed",
               bgcolor: "grey.1",
               borderRadius: ".3rem",
               size: {

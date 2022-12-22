@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import { Link } from "react-scroll";
 
 function CustomButton(props) {
   return (
@@ -18,7 +19,18 @@ function CustomButton(props) {
         },
       }}
     >
-      {props.text}
+      {!props.to && props.text}
+      {props.to && (
+        <Link
+          to={props.to}
+          spy={true}
+          smooth={true}
+          offset={-100}
+          duration={500}
+        >
+          {props.text}
+        </Link>
+      )}
     </Button>
   );
 }

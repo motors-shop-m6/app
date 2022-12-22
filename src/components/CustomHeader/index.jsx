@@ -7,16 +7,21 @@ import {
   Drawer,
   Box,
   Typography,
+  Avatar,
+  Menu,
+  MenuItem,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import motors_shop_logo from "../../assets/motors_shop_logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import {
   buttonTransparent,
   buttonTransparentOutlined,
 } from "../../styles/buttonProps";
 import CustomButton from "../CustomButton";
+import { UserContext } from "../../contexts/user/UserContext";
+import { stringAvatar } from "../../utils";
 
 function CustomHeader(props) {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -27,6 +32,26 @@ function CustomHeader(props) {
     winWidth: window.innerWidth,
     winHeight: window.innerHeight,
   });
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const loginRedirect = () => {
+    navigate("/login");
+  };
+
+  const registerRedirect = () => {
+    navigate("/register");
+  };
+
+  const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -80,11 +105,21 @@ function CustomHeader(props) {
     text: "Fazer Login",
     borderColorHover: "transparent",
     underline: "underline",
+    function: loginRedirect,
   };
   const register = {
     ...buttonTransparentOutlined,
     text: "Cadastrar",
     borderColorHover: "brand.2",
+    function: registerRedirect,
+  };
+  const userName = {
+    ...buttonTransparent,
+    text: user && user.name,
+    size: "medium",
+    borderColorHover: "transparent",
+    underline: "underline",
+    function: handleClick,
   };
 
   return (
@@ -99,10 +134,24 @@ function CustomHeader(props) {
           <Stack
             component="a"
             onClick={() => {
-              navigate("/dashboard");
+              window.location.reload();
+              // navigate("/");
             }}
           >
-            <img src={motors_shop_logo} width="100rem" />
+            <Box
+              component="img"
+              sx={{
+                cursor: "pointer",
+                transition: "300ms ease-in-out",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                  transition: "300ms ease-in-out",
+                },
+              }}
+              src={motors_shop_logo}
+              width="7rem"
+              height="1.25rem"
+            />
           </Stack>
         </Stack>
         {drawerActive ? (
@@ -133,14 +182,38 @@ function CustomHeader(props) {
             </Drawer>
           </>
         ) : (
-          <Stack sx={{ flexGrow: 1 }}>
-            <Stack spacing={3} direction="row">
+          <Stack sx={{ flexGrow: 0.4 }}>
+            <Stack spacing={3} alignItems="center" direction="row">
               <CustomButton {...cars} />
               <CustomButton {...motorcycle} />
               <CustomButton {...auction} />
               <Divider orientation="vertical" flexItem />
-              <CustomButton {...login} />
-              <CustomButton {...register} />
+              {user ? (
+                <Stack direction="row" alignItems="center">
+                  <Avatar {...stringAvatar(user.name)} />
+                  <CustomButton
+                    id="resources-button"
+                    {...userName}
+                    onClick={handleClick}
+                  />
+                  <Menu
+                    id="user-resources"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick={handleClose}>Editar Perfil</MenuItem>
+                    <MenuItem onClick={handleClose}>Editar Endereço</MenuItem>
+                    <MenuItem onClick={handleClose}>Editar Anúncios</MenuItem>
+                    <MenuItem onClick={handleClose}>Sair</MenuItem>
+                  </Menu>
+                </Stack>
+              ) : (
+                <>
+                  <CustomButton {...login} />
+                  <CustomButton {...register} />
+                </>
+              )}
             </Stack>
           </Stack>
         )}

@@ -4,6 +4,7 @@ import { Link } from "react-scroll";
 function CustomButton(props) {
   return (
     <Button
+      onClick={props.function && props.function}
       type={props.type}
       size={props.size}
       variant={props.variant}

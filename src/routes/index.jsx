@@ -4,9 +4,9 @@ import Dashboard from "../pages/Dashboard";
 function AppRoutes(props) {
   return (
     <Routes>
+      <Route path="/" element={<Dashboard />} />
       <Route path="/login" /*element=<></>*/ />
       <Route path="/register" /*element=<></>*/ />
-      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/product" /*element=<></>*/ />
     </Routes>
   );

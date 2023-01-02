@@ -17,6 +17,8 @@ export function stringToColor(string) {
 }
 
 export function stringAvatar(name) {
+  let subname = name.split(" ");
+  if (subname.length < 2) name += " user";
   return {
     sx: {
       bgcolor: stringToColor(name),

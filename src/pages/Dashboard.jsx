@@ -2,6 +2,7 @@ import { Paper, Skeleton, Stack, Typography, Box } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import AuctionCard from "../components/AuctionCard";
 import CustomButton from "../components/CustomButton";
+import CustomEmpty from "../components/CustomEmpty";
 import CustomFooter from "../components/CustomFooter";
 import CustomHeader from "../components/CustomHeader";
 import CustomProduct from "../components/CustomProduct";
@@ -16,6 +17,13 @@ function Dashboard() {
     text: "Motos",
     to: "motorcycles",
   };
+
+  const motorsFilter =
+    vehicles !== null &&
+    vehicles.filter((item) => item.typeOfVehicle === "moto");
+  const carsFilter =
+    vehicles !== null &&
+    vehicles.filter((item) => item.typeOfVehicle === "carro");
 
   return (
     <>
@@ -136,42 +144,21 @@ function Dashboard() {
               <Skeleton width="20rem" height="25rem" variant="rectangular" />
               <Skeleton width="20rem" height="25rem" variant="rectangular" />
             </>
-          ) : vehicles.length > 0 ? (
-            vehicles.map((item) => (
+          ) : carsFilter.length > 0 ? (
+            carsFilter.map((item) => (
               <CustomProduct
                 key={item.id}
-                urlImg={item.coverImage[0].image}
+                urlImg={item.coverImage}
                 nameVehicle={item.title}
                 description={item.description}
-                nameSeller="Caza caza"
+                nameSeller={item.user.name}
                 valueKM={item.km}
                 year={item.year}
                 price={item.price}
               />
             ))
           ) : (
-            <Box
-              sx={{
-                display: "flex",
-                bgcolor: "grey.6",
-                borderRadius: ".7rem",
-                "& > :not(style)": {
-                  m: 1,
-                  width: 230,
-                  height: 200,
-                },
-              }}
-            >
-              <Typography
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                textAlign="center"
-                variant="h5"
-              >
-                Não há nenhum anúncio até o momento! :)
-              </Typography>
-            </Box>
+            <CustomEmpty />
           )}
         </Stack>
       </Stack>
@@ -201,11 +188,11 @@ function Dashboard() {
               <Skeleton width="20rem" height="25rem" variant="rectangular" />
               <Skeleton width="20rem" height="25rem" variant="rectangular" />
             </>
-          ) : vehicles.length > 0 ? (
-            vehicles.map((item) => (
+          ) : motorsFilter.length > 0 ? (
+            motorsFilter.map((item) => (
               <CustomProduct
                 key={item.id}
-                urlImg={item.coverImage[0].image}
+                urlImg={item.coverImage}
                 nameVehicle={item.title}
                 description={item.description}
                 nameSeller="Caza caza"
@@ -215,28 +202,7 @@ function Dashboard() {
               />
             ))
           ) : (
-            <Box
-              sx={{
-                display: "flex",
-                bgcolor: "grey.6",
-                borderRadius: ".7rem",
-                "& > :not(style)": {
-                  m: 1,
-                  width: 230,
-                  height: 200,
-                },
-              }}
-            >
-              <Typography
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                textAlign="center"
-                variant="h5"
-              >
-                Não há nenhum anúncio até o momento! :)
-              </Typography>
-            </Box>
+            <CustomEmpty />
           )}
         </Stack>
       </Stack>

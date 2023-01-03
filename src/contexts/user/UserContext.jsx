@@ -8,8 +8,8 @@ function UserProvider({ children }) {
 
   useEffect(() => {
     async function loadUser() {
-      const token = localStorage.getItem("@motors_shop:token");
-      const id = localStorage.getItem("@motors_shop:id");
+      const token = localStorage.getItem("motors_shop@token");
+      const id = localStorage.getItem("motors_shop@id");
 
       if (token && id) {
         try {

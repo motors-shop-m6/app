@@ -6,11 +6,19 @@ function CustomInput(props) {
       <InputLabel
         sx={{
           color: props.color,
+          fontWeight: props.fontWeight,
         }}
       >
         {props.labelText}
       </InputLabel>
-      <TextField variant={props.variant} inputProps={props.register} />
+      <TextField
+        error={props.error}
+        helperText={props.helperText}
+        type={props.type}
+        variant={props.variant}
+        inputProps={props.register}
+        placeholder={props.placeholder}
+      />
     </Stack>
   );
 }
@@ -23,6 +31,8 @@ export default CustomInput;
     VARIANT can be: text, contained or outlined
     
     <CustomInput
+        color="white"
+        placeholder="Write here your test"
         labelText="Input Test"
         variant="outlined"
         register={register("name")}

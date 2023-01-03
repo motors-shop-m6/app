@@ -14,7 +14,7 @@ import {
 import { useContext, useEffect, useState } from "react";
 import motors_shop_logo from "../../assets/motors_shop_logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   buttonTransparent,
   buttonTransparentOutlined,

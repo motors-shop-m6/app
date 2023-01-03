@@ -18,7 +18,7 @@ function App() {
         draggable
         limit={1}
         pauseOnHover
-        theme="light"
+        theme="dark"
         transition={Slide}
       />
       <AppRoutes />

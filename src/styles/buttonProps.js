@@ -38,3 +38,23 @@ export const buttonOutlinedDashboard = {
   bgcolor: "brand.2",
   padding: ".7rem 4rem",
 };
+
+export const buttonContainedPurple = {
+  type: "submit",
+  size: "medium",
+  variant: "contained",
+  color: "grey.whiteFixed",
+  borderColor: "brand.1",
+  bgcolor: "brand.1",
+  padding: ".7rem 4rem",
+};
+
+export const buttonOutlinedLight = {
+  type: "button",
+  size: "medium",
+  variant: "outlined",
+  color: "grey.0",
+  borderColor: "grey.4",
+  bgcolor: "grey.whiteFixed",
+  padding: ".7rem 4rem",
+};

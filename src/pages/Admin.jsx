@@ -1,6 +1,7 @@
 import { Avatar, Skeleton, Stack, Typography } from "@mui/material";
 import { useContext } from "react";
 import AuctionCard from "../components/AuctionCard";
+import CustomButton from "../components/CustomButton";
 import CustomEmpty from "../components/CustomEmpty";
 import CustomFooter from "../components/CustomFooter";
 import CustomHeader from "../components/CustomHeader";
@@ -8,6 +9,7 @@ import CustomProduct from "../components/CustomProduct";
 import SimpleBackdrop from "../components/SimpleBackdrop";
 import { UserContext } from "../contexts/user/UserContext";
 import { VehiclesContext } from "../contexts/vehicles/VehiclesContext";
+import { buttonOutlinedFullPurple } from "../styles/buttonProps";
 import { stringAvatar } from "../utils";
 
 function Dashboard() {
@@ -21,6 +23,9 @@ function Dashboard() {
     vehicles !== null &&
     vehicles.filter((item) => item.typeOfVehicle === "carro");
 
+  const buttonPurple = { ...buttonOutlinedFullPurple, text: "Criar anúncio" };
+  console.log(user);
+
   return (
     <>
       <SimpleBackdrop open={!!!user} />
@@ -33,7 +38,7 @@ function Dashboard() {
         sx={{
           bgcolor: "brand.2",
           background:
-            "linear-gradient(to bottom, #5126EA 0%, #5126EA 80%, #FFFFFF 80%, #FFFFFF 100%)",
+            "linear-gradient(to bottom, #5126EA 0%, #5126EA 50%, #FFFFFF 50%, #FFFFFF 100%)",
           p: {
             xs: 3,
             sm: 7,
@@ -91,6 +96,9 @@ function Dashboard() {
           >
             {user?.description}
           </Typography>
+          <Stack maxWidth="9rem">
+            <CustomButton {...buttonPurple} />
+          </Stack>
         </Stack>
       </Stack>
       <Stack

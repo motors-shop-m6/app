@@ -1,4 +1,3 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -9,10 +8,18 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-
 import mercedes from "../../assets/mercedes.svg";
+import { UserContext } from "../../contexts/user/UserContext";
+import { useContext } from "react";
+import CustomButton from "../CustomButton";
+import { buttonWhiteOutlined } from "../../styles/buttonProps";
 
-export default function AuctionCard() {
+function AuctionCard() {
+  const { user } = useContext(UserContext);
+
+  const buttonWhiteEdit = { ...buttonWhiteOutlined, text: "Editar" };
+  const buttonWhiteSeeMore = { ...buttonWhiteOutlined, text: "Ver como" };
+
   return (
     <Box
       sx={{
@@ -236,30 +243,62 @@ export default function AuctionCard() {
           </CardActions>
         </CardContent>
       </Card>
-      <Button
-        sx={{
-          width: {
-            xs: 328,
-            sm: 328,
-            md: 735,
-            lg: 735,
-            xl: 735,
-          },
-          height: "61px",
-          color: "#FFFFFF",
-          backgroundColor: "#4529E6",
-          transition: "300ms ease-in-out",
-          "&:hover": {
-            backgroundColor: "#5126EA",
+      {user?.type_user === "anunciante" ? (
+        <Stack
+          direction="row"
+          px={4}
+          spacing={4}
+          sx={{
+            width: {
+              xs: 328,
+              sm: 328,
+              md: 735,
+              lg: 735,
+              xl: 735,
+            },
+            height: "61px",
+            color: "#FFFFFF",
+            backgroundColor: "#4529E6",
             transition: "300ms ease-in-out",
-          },
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        Acessar página do leilão
-        <ArrowForwardIcon />
-      </Button>
+            "&:hover": {
+              backgroundColor: "#5126EA",
+              transition: "300ms ease-in-out",
+            },
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <CustomButton {...buttonWhiteEdit} />
+          <CustomButton {...buttonWhiteSeeMore} />
+        </Stack>
+      ) : (
+        <Button
+          sx={{
+            width: {
+              xs: 328,
+              sm: 328,
+              md: 735,
+              lg: 735,
+              xl: 735,
+            },
+            height: "61px",
+            color: "#FFFFFF",
+            backgroundColor: "#4529E6",
+            transition: "300ms ease-in-out",
+            "&:hover": {
+              backgroundColor: "#5126EA",
+              transition: "300ms ease-in-out",
+            },
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          Acessar página do leilão
+          <ArrowForwardIcon />
+        </Button>
+      )}
     </Box>
   );
 }
+
+export default AuctionCard;

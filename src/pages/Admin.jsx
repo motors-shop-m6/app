@@ -1,22 +1,18 @@
-import { Paper, Skeleton, Stack, Typography, Box } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { Avatar, Skeleton, Stack, Typography } from "@mui/material";
+import { useContext } from "react";
 import AuctionCard from "../components/AuctionCard";
-import CustomButton from "../components/CustomButton";
 import CustomEmpty from "../components/CustomEmpty";
 import CustomFooter from "../components/CustomFooter";
 import CustomHeader from "../components/CustomHeader";
 import CustomProduct from "../components/CustomProduct";
+import SimpleBackdrop from "../components/SimpleBackdrop";
+import { UserContext } from "../contexts/user/UserContext";
 import { VehiclesContext } from "../contexts/vehicles/VehiclesContext";
-import { buttonOutlinedDashboard } from "../styles/buttonProps";
+import { stringAvatar } from "../utils";
 
 function Dashboard() {
   const { vehicles } = useContext(VehiclesContext);
-  const carsButton = { ...buttonOutlinedDashboard, text: "Carros", to: "cars" };
-  const motorcyclesButton = {
-    ...buttonOutlinedDashboard,
-    text: "Motos",
-    to: "motorcycles",
-  };
+  const { user } = useContext(UserContext);
 
   const motorsFilter =
     vehicles !== null &&
@@ -27,6 +23,7 @@ function Dashboard() {
 
   return (
     <>
+      <SimpleBackdrop open={!!!user} />
       <CustomHeader />
       <Stack
         direction="column"
@@ -35,6 +32,8 @@ function Dashboard() {
         spacing={4}
         sx={{
           bgcolor: "brand.2",
+          background:
+            "linear-gradient(to bottom, #5126EA 0%, #5126EA 80%, #FFFFFF 80%, #FFFFFF 100%)",
           p: {
             xs: 3,
             sm: 7,
@@ -42,57 +41,56 @@ function Dashboard() {
           },
         }}
       >
-        <Stack direction="column">
-          <Typography
-            color="grey.whiteFixed"
-            textAlign="center"
-            variant="h1"
-            sx={{
-              fontSize: {
-                xs: "1.5rem",
-                sm: "2rem",
-                md: "2.75rem",
-              },
-            }}
-          >
-            Velocidade e experiência em um
-          </Typography>
-          <Typography
-            color="grey.whiteFixed"
-            textAlign="center"
-            variant="h1"
-            sx={{
-              fontSize: {
-                xs: "1.5rem",
-                sm: "2rem",
-                md: "2.75rem",
-              },
-            }}
-          >
-            lugar feito para você
-          </Typography>
-        </Stack>
-        <Typography
-          color="grey.whiteFixed"
-          variant="h7"
-          textAlign="center"
-          fontFamily="Inter"
+        <Stack
+          spacing={3}
           sx={{
-            fontSize: {
-              xs: ".6rem",
-              sm: ".8rem",
-              md: "1rem",
+            p: {
+              xs: 2,
+              sm: 5,
+              md: 7,
             },
+            width: {
+              xs: "100%",
+              sm: "90%",
+              md: "80%",
+            },
+            bgcolor: "grey.whiteFixed",
+            borderRadius: ".3rem",
           }}
         >
-          Um ambiente feito para você explorar o seu melhor
-        </Typography>
-        <Stack
-          direction={{ xs: "column", sm: "column", md: "row" }}
-          spacing={3}
-        >
-          <CustomButton {...carsButton} />
-          <CustomButton {...motorcyclesButton} />
+          <Avatar
+            {...stringAvatar(`${user?.name}`)}
+            sx={{
+              backgroundColor: "brand.1",
+              fontFamily: "Inter",
+              width: "6rem",
+              height: "6rem",
+              fontSize: "2rem",
+              color: "grey.whiteFixed",
+            }}
+          />
+          <Stack alignItems="center" direction="row" spacing={2}>
+            <Typography variant="h6" sx={{ color: "grey.1" }}>
+              {user?.name}
+            </Typography>
+            <Typography
+              variant="body2"
+              textTransform="capitalize"
+              sx={{ color: "brand.1", fontSize: "0.875rem", fontWeight: 500 }}
+            >
+              {user?.type_user}
+            </Typography>
+          </Stack>
+          <Typography
+            variant="body1"
+            sx={{
+              fontWeight: 400,
+              fontSize: "1rem",
+              color: "grey.2",
+            }}
+          >
+            {user?.description}
+          </Typography>
         </Stack>
       </Stack>
       <Stack

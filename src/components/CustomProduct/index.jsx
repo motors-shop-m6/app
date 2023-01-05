@@ -27,7 +27,7 @@ function CustomProduct(props) {
           height: "30vh",
         }}
       >
-        <img src={props.urlImg}></img>
+        <img src={props.urlImg} />
       </Container>
 
       <Container

@@ -82,3 +82,13 @@ export const buttonWhiteOutlined = {
     textDecoration: "underline",
   },
 };
+
+export const buttonContainedPurpleButton = {
+  type: "button",
+  size: "medium",
+  variant: "contained",
+  color: "grey.whiteFixed",
+  borderColor: "brand.1",
+  bgcolor: "brand.1",
+  padding: ".7rem 4rem",
+};

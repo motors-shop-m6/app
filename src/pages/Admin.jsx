@@ -6,6 +6,7 @@ import CustomEmpty from "../components/CustomEmpty";
 import CustomFooter from "../components/CustomFooter";
 import CustomHeader from "../components/CustomHeader";
 import CustomProduct from "../components/CustomProduct";
+import ModalCreateProduct from "../components/ModalCreateProduct";
 import SimpleBackdrop from "../components/SimpleBackdrop";
 import { UserContext } from "../contexts/user/UserContext";
 import { VehiclesContext } from "../contexts/vehicles/VehiclesContext";
@@ -29,6 +30,7 @@ function Dashboard() {
   return (
     <>
       <SimpleBackdrop open={!!!user} />
+      <ModalCreateProduct open={true} />
       <CustomHeader />
       <Stack
         direction="column"

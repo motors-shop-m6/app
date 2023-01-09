@@ -14,10 +14,14 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CustomButton from "../CustomButton";
 import {
+  buttonContainedPurple,
   buttonContainedPurpleButton,
+  buttonNoBorder,
   buttonOutlinedLight,
 } from "../../styles/buttonProps";
 import { useState } from "react";
+import ModalText from "../ModalText";
+import CustomInput from "../CustomInput";
 
 function ModalCreateProduct(props) {
   //   const {
@@ -26,12 +30,23 @@ function ModalCreateProduct(props) {
   //     formState: { errors },
   //   } = useForm({ resolver: yupResolver(props.schema) });
   const [adType, setAdType] = useState("Venda");
+  const [vehicle, setVehicle] = useState("carro");
+  const [imgField, setImgField] = useState(1);
 
   const changeAdSell = () => {
     setAdType("Venda");
   };
   const changeAdAuction = () => {
     setAdType("Leilão");
+  };
+  const changeCar = () => {
+    setVehicle("carro");
+  };
+  const changeMotorcycle = () => {
+    setVehicle("moto");
+  };
+  const addImgField = () => {
+    if (imgField < 6) setImgField(imgField + 1);
   };
 
   const buttonSell = {
@@ -47,6 +62,34 @@ function ModalCreateProduct(props) {
     ...(adType === "Venda"
       ? { ...buttonOutlinedLight }
       : { ...buttonContainedPurpleButton }),
+  };
+  const buttonCar = {
+    text: "Carro",
+    function: changeCar,
+    ...(vehicle === "carro"
+      ? { ...buttonContainedPurpleButton }
+      : { ...buttonOutlinedLight }),
+  };
+  const buttonMotorcycle = {
+    text: "Moto",
+    function: changeMotorcycle,
+    ...(vehicle === "carro"
+      ? { ...buttonOutlinedLight }
+      : { ...buttonContainedPurpleButton }),
+  };
+
+  const buttonBlank = {
+    ...buttonNoBorder,
+    text: "Adicionar campo para imagem da galeria",
+    function: addImgField,
+  };
+  const buttonGrey = {
+    ...buttonNoBorder,
+    text: "Cancelar",
+  };
+  const buttonPurple = {
+    ...buttonContainedPurple,
+    text: "Criar anuncio",
   };
 
   return (
@@ -79,29 +122,103 @@ function ModalCreateProduct(props) {
         </IconButton>
       </DialogTitle>
       <DialogContent>
-        <Stack direction="column" spacing={3}>
-          <Typography
-            variant="body2"
-            sx={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: ".875",
-              fontWeight: 500,
-            }}
-          >
-            Tipo de anúncio
-          </Typography>
-          <Stack direction="row" spacing={2}>
+        <Stack direction="column" spacing={2}>
+          <ModalText text="Tipo de anúncio" />
+          <Stack direction={{ xs: "column", sm: "row", md: "row" }} spacing={2}>
             <CustomButton {...buttonSell} />
             <CustomButton {...buttonAuction} />
           </Stack>
+          <ModalText text="Informações do veículo" />
+          <Stack direction="column" spacing={1}>
+            <ModalText text="Título" />
+            <CustomInput
+              color="white"
+              placeholder="Digitar Título"
+              variant="outlined"
+              // register={register("name")}
+            />
+          </Stack>
+          <Stack
+            spacing={{ xs: 0, sm: 1, md: 1 }}
+            direction="row"
+            flexWrap={{ xs: "wrap", sm: "wrap", md: "nowrap" }}
+            alignItems="center"
+          >
+            <Stack direction="column" spacing={1}>
+              <ModalText text="Ano" />
+              <CustomInput
+                color="white"
+                placeholder="Digitar Ano"
+                variant="outlined"
+                // register={register("name")}
+              />
+            </Stack>
+            <Stack direction="column" spacing={1}>
+              <ModalText text="Quilometragem" />
+              <CustomInput
+                color="white"
+                placeholder="0"
+                variant="outlined"
+                // register={register("name")}
+              />
+            </Stack>
+            <Stack direction="column" spacing={1}>
+              <ModalText text="Preço" />
+              <CustomInput
+                color="white"
+                placeholder="Digitar preço"
+                variant="outlined"
+                // register={register("name")}
+              />
+            </Stack>
+          </Stack>
+          <Stack direction="column" spacing={1}>
+            <ModalText text="Descrição" />
+            <CustomInput
+              color="white"
+              placeholder="Digitar descrição"
+              variant="outlined"
+              // register={register("name")}
+            />
+          </Stack>
+          <Stack direction="column" spacing={2}>
+            <ModalText text="Tipo de veículo" />
+            <Stack
+              direction={{ xs: "column", sm: "row", md: "row" }}
+              spacing={2}
+            >
+              <CustomButton {...buttonCar} />
+              <CustomButton {...buttonMotorcycle} />
+            </Stack>
+          </Stack>
+
+          <Stack direction="column" spacing={1}>
+            <ModalText text="Imagem da capa" />
+            <CustomInput
+              color="white"
+              placeholder="Inserir URL da imagem"
+              variant="outlined"
+              // register={register("name")}
+            />
+          </Stack>
+          {[...Array(imgField)].map((x, i) => (
+            <Stack key={i} direction="column" spacing={1}>
+              <ModalText text={`${i + 1}ª Imagem da galeria`} />
+              <CustomInput
+                color="white"
+                placeholder="Inserir URL da imagem"
+                variant="outlined"
+                // register={register("name")}
+              />
+            </Stack>
+          ))}
+          <CustomButton {...buttonBlank} />
         </Stack>
       </DialogContent>
-      <DialogActions
-        sx={{
-          margin: "auto",
-          pb: "2rem",
-        }}
-      ></DialogActions>
+      <DialogActions>
+        <CustomButton {...buttonGrey} />
+        <CustomButton {...buttonPurple} />
+      </DialogActions>
     </Dialog>
   );
 }

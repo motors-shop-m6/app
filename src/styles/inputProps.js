@@ -1,7 +1,7 @@
 export const nameInput = {
   fontWeight: 500,
-  placeholder: "Digitar usuário",
-  labelText: "Usuário",
+  placeholder: "Digitar email",
+  labelText: "Email",
   variant: "outlined",
 };
 

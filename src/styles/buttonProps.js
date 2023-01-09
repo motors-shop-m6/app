@@ -92,3 +92,25 @@ export const buttonContainedPurpleButton = {
   bgcolor: "brand.1",
   padding: ".7rem 4rem",
 };
+
+export const buttonNoBorder = {
+  type: "button",
+  size: "small",
+  variant: "outlined",
+  color: "brand.1",
+  borderColor: "transparent",
+  justify: "flex-start",
+  borderColorHover: "transparent",
+  bgcolor: "transparent",
+  padding: ".6rem 1rem",
+};
+
+export const buttonGrey = {
+  type: "button",
+  size: "small",
+  variant: "filled",
+  color: "grey.2",
+  borderColor: "grey.6",
+  bgcolor: "grey.6",
+  padding: ".6rem 1rem",
+};

@@ -46,7 +46,6 @@ export const buttonContainedPurple = {
   color: "grey.whiteFixed",
   borderColor: "brand.1",
   bgcolor: "brand.1",
-  padding: ".7rem 4rem",
 };
 
 export const buttonOutlinedLight = {

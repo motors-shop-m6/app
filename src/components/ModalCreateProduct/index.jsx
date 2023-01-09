@@ -98,6 +98,11 @@ function ModalCreateProduct(props) {
   const buttonPurple = {
     ...buttonContainedPurple,
     text: "Criar anuncio",
+    padding: {
+      sm: ".3rem 1rem",
+      md: ".7rem 4rem",
+      lg: ".7rem 4rem",
+    },
     ...(!errors && { function: props.handleClose }),
   };
 
@@ -110,7 +115,6 @@ function ModalCreateProduct(props) {
         setVehicles([...vehicles, res.data]);
       })
       .catch((err) => {
-        console.log(err);
         toast.error("Dados inválidos, verifique os campos");
       });
     return response;
@@ -258,7 +262,11 @@ function ModalCreateProduct(props) {
           <CustomButton {...buttonBlank} />
         </Stack>
       </DialogContent>
-      <DialogActions>
+      <DialogActions
+        sx={{
+          direction: "column",
+        }}
+      >
         <CustomButton {...buttonGrey} />
         <CustomButton {...buttonPurple} />
       </DialogActions>

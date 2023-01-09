@@ -8,6 +8,7 @@ function CustomButton(props) {
       type={props.type}
       size={props.size}
       variant={props.variant}
+      disabled={props.disabled}
       sx={{
         color: props.color,
         borderColor: props.borderColor,

@@ -1,5 +1,5 @@
 import { Avatar, Skeleton, Stack, Typography } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuctionCard from "../components/AuctionCard";
 import CustomButton from "../components/CustomButton";
 import CustomEmpty from "../components/CustomEmpty";
@@ -16,6 +16,7 @@ import { stringAvatar } from "../utils";
 function Dashboard() {
   const { vehicles } = useContext(VehiclesContext);
   const { user } = useContext(UserContext);
+  const [ModalCreate, setModalCreate] = useState(false);
 
   const motorsFilter =
     vehicles !== null &&
@@ -23,14 +24,26 @@ function Dashboard() {
   const carsFilter =
     vehicles !== null &&
     vehicles.filter((item) => item.typeOfVehicle === "carro");
+  const activateModalCreate = () => {
+    setModalCreate(true);
+  };
+  const deactivateModalCreate = () => {
+    setModalCreate(false);
+  };
 
-  const buttonPurple = { ...buttonOutlinedFullPurple, text: "Criar anúncio" };
-  console.log(user);
+  const buttonPurple = {
+    ...buttonOutlinedFullPurple,
+    text: "Criar anúncio",
+    function: activateModalCreate,
+  };
 
   return (
     <>
       <SimpleBackdrop open={!!!user} />
-      <ModalCreateProduct open={true} />
+      <ModalCreateProduct
+        open={ModalCreate}
+        handleClose={deactivateModalCreate}
+      />
       <CustomHeader />
       <Stack
         direction="column"

@@ -13,25 +13,31 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CustomButton from "../CustomButton";
+import { toast } from "react-toastify";
 import {
   buttonContainedPurple,
   buttonContainedPurpleButton,
   buttonNoBorder,
   buttonOutlinedLight,
 } from "../../styles/buttonProps";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ModalText from "../ModalText";
 import CustomInput from "../CustomInput";
+import { createProductSchema } from "../../schema";
+import { api } from "../../api/api";
+import { VehiclesContext } from "../../contexts/vehicles/VehiclesContext";
 
 function ModalCreateProduct(props) {
-  //   const {
-  //     register,
-  //     handleSubmit,
-  //     formState: { errors },
-  //   } = useForm({ resolver: yupResolver(props.schema) });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(createProductSchema) });
   const [adType, setAdType] = useState("Venda");
   const [vehicle, setVehicle] = useState("carro");
   const [imgField, setImgField] = useState(1);
+
+  const { vehicles, setVehicles } = useContext(VehiclesContext);
 
   const changeAdSell = () => {
     setAdType("Venda");
@@ -57,6 +63,7 @@ function ModalCreateProduct(props) {
       : { ...buttonOutlinedLight }),
   };
   const buttonAuction = {
+    disabled: true,
     text: "Leilão",
     function: changeAdAuction,
     ...(adType === "Venda"
@@ -86,18 +93,39 @@ function ModalCreateProduct(props) {
   const buttonGrey = {
     ...buttonNoBorder,
     text: "Cancelar",
+    function: props.handleClose,
   };
   const buttonPurple = {
     ...buttonContainedPurple,
     text: "Criar anuncio",
+    ...(!errors && { function: props.handleClose }),
   };
+
+  const onSubmitData = (data) => {
+    data.images.shift();
+    const response = api
+      .post("/advertisement", data)
+      .then((res) => {
+        toast.success("Veículo anunciado com sucesso");
+        setVehicles([...vehicles, res.data]);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Dados inválidos, verifique os campos");
+      });
+    return response;
+  };
+
+  useEffect(() => {
+    register("typeOfVehicle", { value: vehicle });
+  }, [vehicle]);
 
   return (
     <Dialog
       component="form"
-      //   onSubmit={handleSubmit(props.contactFunction)}
+      onSubmit={handleSubmit(onSubmitData)}
       open={props.open}
-      //   onClose={() => props.setOpen(false)}
+      onClose={props.handleClose}
     >
       <DialogTitle>
         <Typography
@@ -117,6 +145,7 @@ function ModalCreateProduct(props) {
             top: 8,
             color: "grey.4",
           }}
+          onClick={props.handleClose}
         >
           <CloseIcon />
         </IconButton>
@@ -135,7 +164,9 @@ function ModalCreateProduct(props) {
               color="white"
               placeholder="Digitar Título"
               variant="outlined"
-              // register={register("name")}
+              error={errors?.title ? true : false}
+              helperText={errors?.title && errors.title.message}
+              register={register("title")}
             />
           </Stack>
           <Stack
@@ -150,7 +181,9 @@ function ModalCreateProduct(props) {
                 color="white"
                 placeholder="Digitar Ano"
                 variant="outlined"
-                // register={register("name")}
+                error={errors?.year ? true : false}
+                helperText={errors?.year && errors.year.message}
+                register={register("year")}
               />
             </Stack>
             <Stack direction="column" spacing={1}>
@@ -159,7 +192,9 @@ function ModalCreateProduct(props) {
                 color="white"
                 placeholder="0"
                 variant="outlined"
-                // register={register("name")}
+                error={errors?.km ? true : false}
+                helperText={errors?.km && errors.km.message}
+                register={register("km")}
               />
             </Stack>
             <Stack direction="column" spacing={1}>
@@ -168,7 +203,9 @@ function ModalCreateProduct(props) {
                 color="white"
                 placeholder="Digitar preço"
                 variant="outlined"
-                // register={register("name")}
+                error={errors?.price ? true : false}
+                helperText={errors?.price && errors.price.message}
+                register={register("price")}
               />
             </Stack>
           </Stack>
@@ -178,7 +215,9 @@ function ModalCreateProduct(props) {
               color="white"
               placeholder="Digitar descrição"
               variant="outlined"
-              // register={register("name")}
+              error={errors?.description ? true : false}
+              helperText={errors?.description && errors.description.message}
+              register={register("description")}
             />
           </Stack>
           <Stack direction="column" spacing={2}>
@@ -198,7 +237,9 @@ function ModalCreateProduct(props) {
               color="white"
               placeholder="Inserir URL da imagem"
               variant="outlined"
-              // register={register("name")}
+              error={errors?.coverImage ? true : false}
+              helperText={errors?.coverImage && errors.coverImage.message}
+              register={register("coverImage")}
             />
           </Stack>
           {[...Array(imgField)].map((x, i) => (
@@ -208,7 +249,9 @@ function ModalCreateProduct(props) {
                 color="white"
                 placeholder="Inserir URL da imagem"
                 variant="outlined"
-                // register={register("name")}
+                error={errors?.images ? true : false}
+                helperText={errors?.images && errors.images.message}
+                register={register(`images.${i + 1}`)}
               />
             </Stack>
           ))}

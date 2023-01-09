@@ -210,7 +210,7 @@ function CustomHeader(props) {
                   >
                     <MenuItem onClick={handleClose}>Editar Perfil</MenuItem>
                     <MenuItem onClick={handleClose}>Editar Endereço</MenuItem>
-                    <MenuItem onClick={handleClose}>Editar Anúncios</MenuItem>
+                    <MenuItem onClick={handleClose}>Meus Anúncios</MenuItem>
                     <MenuItem
                       onClick={() => {
                         handleClose();

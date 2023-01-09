@@ -7,7 +7,7 @@ function ModalText(props) {
       sx={{
         fontFamily: "'Inter', sans-serif",
         fontSize: ".875",
-        fontWeight: 500,
+        fontWeight: 600,
       }}
     >
       {props.text}

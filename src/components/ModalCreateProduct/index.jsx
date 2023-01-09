@@ -14,7 +14,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CustomButton from "../CustomButton";
 import {
+  buttonContainedPurple,
   buttonContainedPurpleButton,
+  buttonNoBorder,
   buttonOutlinedLight,
 } from "../../styles/buttonProps";
 import { useState } from "react";
@@ -42,6 +44,9 @@ function ModalCreateProduct(props) {
   };
   const changeMotorcycle = () => {
     setVehicle("moto");
+  };
+  const addImgField = () => {
+    if (imgField < 6) setImgField(imgField + 1);
   };
 
   const buttonSell = {
@@ -71,6 +76,20 @@ function ModalCreateProduct(props) {
     ...(vehicle === "carro"
       ? { ...buttonOutlinedLight }
       : { ...buttonContainedPurpleButton }),
+  };
+
+  const buttonBlank = {
+    ...buttonNoBorder,
+    text: "Adicionar campo para imagem da galeria",
+    function: addImgField,
+  };
+  const buttonGrey = {
+    ...buttonNoBorder,
+    text: "Cancelar",
+  };
+  const buttonPurple = {
+    ...buttonContainedPurple,
+    text: "Criar anuncio",
   };
 
   return (
@@ -182,14 +201,24 @@ function ModalCreateProduct(props) {
               // register={register("name")}
             />
           </Stack>
+          {[...Array(imgField)].map((x, i) => (
+            <Stack key={i} direction="column" spacing={1}>
+              <ModalText text={`${i + 1}ª Imagem da galeria`} />
+              <CustomInput
+                color="white"
+                placeholder="Inserir URL da imagem"
+                variant="outlined"
+                // register={register("name")}
+              />
+            </Stack>
+          ))}
+          <CustomButton {...buttonBlank} />
         </Stack>
       </DialogContent>
-      <DialogActions
-        sx={{
-          margin: "auto",
-          pb: "2rem",
-        }}
-      ></DialogActions>
+      <DialogActions>
+        <CustomButton {...buttonGrey} />
+        <CustomButton {...buttonPurple} />
+      </DialogActions>
     </Dialog>
   );
 }

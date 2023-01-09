@@ -30,7 +30,7 @@ function Dashboard() {
   return (
     <>
       <SimpleBackdrop open={!!!user} />
-      <ModalCreateProduct open={false} />
+      <ModalCreateProduct open={true} />
       <CustomHeader />
       <Stack
         direction="column"

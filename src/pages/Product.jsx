@@ -10,6 +10,7 @@ import GridPicturesProduct from "../components/GridPicturesProduct";
 
 function Product(props){
 
+   
     
     return(
         <Stack
@@ -242,15 +243,15 @@ function Product(props){
                     </Stack>
 
                     <GridPicturesProduct
-                        pictureOne={Merdes}
-                        pictureTwo={Merdes}
-                        pictureThree={Merdes}
+                        pictureOne={props.pic1}
+                        pictureTwo={props.pic2}
+                        pictureThree={props.pic3}
                     />
 
                     <GridPicturesProduct
-                        pictureOne={Merdes}
-                        pictureTwo={Merdes}
-                        pictureThree={Merdes}
+                        pictureOne={props.pic4}
+                        pictureTwo={props.pic5}
+                        pictureThree={props.pic6}
                     />
 
                 </Stack>

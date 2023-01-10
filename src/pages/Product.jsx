@@ -3,7 +3,7 @@ import CustomHeader from "../components/CustomHeader";
 import { Stack, Avatar } from "@mui/material";
 import { stringAvatar } from "../utils";
 import CustomFooter from "../components/CustomFooter";
-
+import Reviews from "../components/Reviews";
 
 function Product(){
 
@@ -415,13 +415,44 @@ function Product(){
 
             <Stack
                 sx={{
+                    alignItems: 'center',
                     width: '300px',
                     height: '850px',
                     backgroundColor: 'grey.10',
                     marginTop: '10px',
+                    overflow: 'auto',
                 }}
             >
-                Comentários
+                <Stack
+                    sx={{
+                        fontFamily: '',
+                        fontWeight: 600,
+                        fontSize: '20px',
+                        lineHeight: '25px',
+
+                        marginTop: '30px',
+                        // border: '1px solid red',
+                        width: '280px',
+                    }}
+                >
+                    Comentários
+                </Stack>
+
+                <Reviews 
+                    name={"Jhon Muller"} 
+                    review={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."} 
+                />
+
+                <Reviews 
+                    name={"Jhon Muller"} 
+                    review={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."} 
+                />
+
+                <Reviews 
+                    name={"Jhon Muller"} 
+                    review={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."} 
+                />
+                
             </Stack>
 
             <CustomFooter/>

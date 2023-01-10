@@ -43,6 +43,7 @@ function CustomHeader() {
   const topFunction = () => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+    navigate("/");
   };
 
   const handleClick = (event) => {
@@ -67,7 +68,7 @@ function CustomHeader() {
     setId("");
     setUser(null);
     if (location.pathname === "/") return window.location.reload;
-    if (!user) navigate("/");
+    navigate("/");
   };
 
   const screenWatcher = () => {
@@ -151,7 +152,6 @@ function CustomHeader() {
             component="a"
             onClick={() => {
               topFunction();
-              navigate("/");
             }}
           >
             <Box

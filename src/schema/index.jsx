@@ -60,6 +60,7 @@ export const registerSchema = yup.object().shape({
     .required("Confirme a senha")
     .oneOf([yup.ref("password")], "As senhas não são iguais!")
     .max(20),
+  })
 
 export const createProductSchema = yup.object().shape({
   title: yup

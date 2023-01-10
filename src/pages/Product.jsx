@@ -5,8 +5,10 @@ import { stringAvatar } from "../utils";
 import CustomFooter from "../components/CustomFooter";
 import Reviews from "../components/Reviews";
 import ReviewsAdd from "../components/ReviewsAdd";
+import Merdes from "../assets/mercedes.svg"
+import GridPicturesProduct from "../components/GridPicturesProduct";
 
-function Product(){
+function Product(props){
 
     
     return(
@@ -47,7 +49,7 @@ function Product(){
                         borderRadius: '4px'
                     }}
                 >
-                    Foto principal
+                    <img src={props.urlImg} /> {/*url da imagem principal.*/}
                 </Stack>
 
                 <Stack
@@ -71,7 +73,7 @@ function Product(){
                             fontFamily: ''
                         }}
                     >
-                        Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200 
+                        {props.nameVehicle} {/*Nome do veículo.*/}
                     </Stack>
 
                     <Stack 
@@ -97,7 +99,7 @@ function Product(){
                                 color: 'brand.1',
                             }}
                         >
-                            2013
+                            {props.year} {/*Ano do automóvel.*/}
                         </Stack>
                         <Stack
                             sx={{
@@ -117,7 +119,7 @@ function Product(){
 
                             }}
                         >
-                            0 KM
+                            {props.km} KM {/*Quilômetros rodado.*/}
                         </Stack>
                     </Stack>
 
@@ -134,7 +136,7 @@ function Product(){
 
                         }}
                     >
-                        R$ 00.000,00
+                        R$ {props.price} {/*Preço do automóvel*/}
                     </Stack>
 
                     <Stack 
@@ -207,7 +209,7 @@ function Product(){
                             color: 'grey.2'
                         }}
                     >
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        {props.description} {/*Descrição do anúncio*/}
                     </Stack>
                 </Stack>
 
@@ -239,105 +241,17 @@ function Product(){
                         Fotos
                     </Stack>
 
-                    <Stack
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent:'space-between',
-                            width: '280px',
-                            marginTop: '10px',
-                        }}
-                    >
-                        <Stack
-                            sx={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: 'grey.7',
-                                width: '90px',
-                                height: '90px',
-                                borderRadius: '4px',
-                            }}
-                        >
-                            Foto
-                        </Stack>
-                        <Stack
-                            sx={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: 'grey.7',
-                                width: '90px',
-                                height: '90px',
-                                borderRadius: '4px',
-                            }}
-                        >
-                            Foto
-                        </Stack>
-                        <Stack
-                            sx={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: 'grey.7',
-                                width: '90px',
-                                height: '90px',
-                                borderRadius: '4px',
-                            }}
-                        >
-                            Foto
-                        </Stack>
-                    </Stack>
+                    <GridPicturesProduct
+                        pictureOne={Merdes}
+                        pictureTwo={Merdes}
+                        pictureThree={Merdes}
+                    />
 
-                    <Stack
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent:'space-between',
-                            marginTop: '10px',
-                            width: '280px'
-                        }}
-                    >
-                        <Stack
-                            sx={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: 'grey.7',
-                                width: '90px',
-                                height: '90px',
-                                borderRadius: '4px',
-                            }}
-                        >
-                            Foto
-                        </Stack>
-                        <Stack
-                            sx={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: 'grey.7',
-                                width: '90px',
-                                height: '90px',
-                                borderRadius: '4px',
-                            }}
-                        >
-                            Foto
-                        </Stack>
-                        <Stack
-                            sx={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: 'grey.7',
-                                width: '90px',
-                                height: '90px',
-                                borderRadius: '4px',
-                            }}
-                        >
-                            Foto
-                        </Stack>
-                    </Stack>
+                    <GridPicturesProduct
+                        pictureOne={Merdes}
+                        pictureTwo={Merdes}
+                        pictureThree={Merdes}
+                    />
 
                 </Stack>
 
@@ -358,7 +272,7 @@ function Product(){
 
 
                 <Avatar
-                    {...stringAvatar('Samuel Leão')}
+                    {...stringAvatar(`${props.advertiser}`)}
                     sx={{
                         backgroundColor: "brand.1",
                         fontFamily: "Inter",
@@ -375,7 +289,7 @@ function Product(){
                         color: 'grey.1',
                     }}
                 >
-                    Samuel Leão
+                    {props.advertiser} {/*Nome do anunciante.*/ }
                 </Stack>
 
 
@@ -389,7 +303,8 @@ function Product(){
                         color: 'grey.2',
                     }}
                 >
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                    {props.descAdvertiser} {/*Descrição do anunciante.*/ }
+                    
                 </Stack>
 
 
@@ -433,7 +348,6 @@ function Product(){
                         lineHeight: '25px',
 
                         marginTop: '30px',
-                        // border: '1px solid red',
                         width: '280px',
                     }}
                 >

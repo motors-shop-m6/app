@@ -1,4 +1,4 @@
-import { Box, Container, Avatar } from "@mui/material";
+import { Box, Container, Avatar, Stack } from "@mui/material";
 import { stringAvatar } from "../../utils";
 
 function CustomProduct(props) {
@@ -18,25 +18,21 @@ function CustomProduct(props) {
         },
       }}
     >
-      <Container
+      <Stack
         sx={{
           backgroundColor: "#E9ECEF",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
           height: "30vh",
+          width: "100%",
         }}
       >
         <img
-        
           style={{
-            width: '20rem',
-            height: '100%',
-            borderRadius: '10px 10px 0 0',
+            width: "100%",
+            height: "100%",
           }}
-            
-        src={props.Image} />
-      </Container>
+          src={props.urlImg}
+        />
+      </Stack>
 
       <Container
         disableGutters

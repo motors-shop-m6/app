@@ -4,6 +4,7 @@ import { Stack, Avatar } from "@mui/material";
 import { stringAvatar } from "../utils";
 import CustomFooter from "../components/CustomFooter";
 import Reviews from "../components/Reviews";
+import ReviewsAdd from "../components/ReviewsAdd";
 
 function Product(){
 
@@ -420,6 +421,7 @@ function Product(){
                     height: '850px',
                     backgroundColor: 'grey.10',
                     marginTop: '10px',
+                    borderRadius: '4px',
                     overflow: 'auto',
                 }}
             >
@@ -453,6 +455,19 @@ function Product(){
                     review={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."} 
                 />
                 
+            </Stack>
+
+            <Stack
+                sx={{
+                    alignItems: 'center',
+                    width: '300px',
+                    height: '350px',
+                    backgroundColor: 'grey.10',
+                    marginTop: '10px',
+                    borderRadius: '4px',
+                }}
+            >
+                <ReviewsAdd user={"Jhon Muller"}   />
             </Stack>
 
             <CustomFooter/>

@@ -413,6 +413,17 @@ function Product(){
                 </Stack>
             </Stack>
 
+            <Stack
+                sx={{
+                    width: '300px',
+                    height: '850px',
+                    backgroundColor: 'grey.10',
+                    marginTop: '10px',
+                }}
+            >
+                Comentários
+            </Stack>
+
             <CustomFooter/>
         </Stack>
     )

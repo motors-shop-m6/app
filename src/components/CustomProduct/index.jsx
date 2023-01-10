@@ -27,7 +27,15 @@ function CustomProduct(props) {
           height: "30vh",
         }}
       >
-        <img src={props.urlImg} />
+        <img
+        
+          style={{
+            width: '20rem',
+            height: '100%',
+            borderRadius: '10px 10px 0 0',
+          }}
+            
+        src={props.Image} />
       </Container>
 
       <Container

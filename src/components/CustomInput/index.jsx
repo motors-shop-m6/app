@@ -18,6 +18,7 @@ function CustomInput(props) {
         variant={props.variant}
         inputProps={props.register}
         placeholder={props.placeholder}
+        name={props.name}
       />
     </Stack>
   );

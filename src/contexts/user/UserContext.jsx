@@ -5,35 +5,39 @@ export const UserContext = createContext({});
 
 function UserProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(
+    localStorage.getItem("@motors_shop:token") || ""
+  );
+  const [id, setId] = useState(localStorage.getItem("@motors_shop:id") || "");
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function loadUser() {
-      const token = localStorage.getItem("motors_shop@token");
-      const id = localStorage.getItem("motors_shop@id");
+  function loadUser() {
+    if (token && id) {
+      api.defaults.headers.authorization = `Bearer ${token}`;
 
-      if (token && id) {
-        try {
-          api.defaults.headers.authorization = `Bearer ${token}`;
-
-          await api
-            .get($`/profile/${id}`)
-            .then((res) => {
-              setUser(res.data);
-            })
-            .catch((err) => {
-              console.error(err);
-            });
-        } catch (error) {
-          console.error(error);
-        }
-      }
+      api
+        .get(`/user/${id}`)
+        .then((res) => {
+          setUser(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
-
+  }
+  useEffect(() => {
     loadUser();
-  }, []);
+  }, [token]);
 
   return (
-    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
+    <UserContext.Provider
+      value={{ user, loading, loadUser, token, setToken, id, setId }}
+    >
+      {children}
+    </UserContext.Provider>
   );
 }
 

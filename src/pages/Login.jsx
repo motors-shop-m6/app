@@ -1,4 +1,4 @@
-import { InputBase, InputLabel, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import CustomFooter from "../components/CustomFooter";
 import CustomHeader from "../components/CustomHeader";
 import CustomInput from "../components/CustomInput";
@@ -14,9 +14,12 @@ import {
 import { api } from "../api/api";
 import { nameInput, passwordInput } from "../styles/inputProps";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../contexts/user/UserContext";
 
 function Login() {
   const navigate = useNavigate();
+  const { setToken, setId } = useContext(UserContext);
   const {
     register,
     handleSubmit,
@@ -42,9 +45,9 @@ function Login() {
   };
   const nameInputProps = {
     ...nameInput,
-    error: errors?.name ? true : false,
-    helperText: errors?.name && errors.name.message,
-    register: register("name"),
+    error: errors?.email ? true : false,
+    helperText: errors?.email && errors.email.message,
+    register: register("email"),
   };
   const passwordInputProps = {
     ...passwordInput,
@@ -57,11 +60,12 @@ function Login() {
     const response = api
       .post("/login", data)
       .then((res) => {
-        localStorage.setItem("motors_shop@token", res.data.token);
-        localStorage.setItem("motors_shop@id", res.data.id);
+        localStorage.setItem("@motors_shop:token", res.data.token);
+        localStorage.setItem("@motors_shop:id", res.data.id);
+        setToken(res.data.token);
+        setId(res.data.id);
         toast.success("Login bem sucedido!");
-        setIsLogged(true);
-        setTimeout(() => navigate("/profile"), 500);
+        setTimeout(() => navigate("/admin"), 500);
       })
       .catch((err) => {
         console.log(err);

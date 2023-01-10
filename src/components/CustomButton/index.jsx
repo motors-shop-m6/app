@@ -8,12 +8,14 @@ function CustomButton(props) {
       type={props.type}
       size={props.size}
       variant={props.variant}
+      disabled={props.disabled}
       sx={{
         color: props.color,
         borderColor: props.borderColor,
         bgcolor: props.bgcolor,
         padding: props.padding,
         fontFamily: "'Inter', sans-serif",
+        justifyContent: props.justify,
         "&:hover": {
           textDecoration: props.underline,
           borderColor: props.borderColorHover,

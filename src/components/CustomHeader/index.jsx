@@ -34,6 +34,7 @@ function CustomHeader(props) {
   });
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const { user, setToken, setId } = useContext(UserContext);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -51,7 +52,12 @@ function CustomHeader(props) {
     navigate("/register");
   };
 
-  const { user } = useContext(UserContext);
+  const logoutRedirect = () => {
+    localStorage.clear();
+    setToken("");
+    setId("");
+    navigate("/");
+  };
 
   const navigate = useNavigate();
 
@@ -134,8 +140,8 @@ function CustomHeader(props) {
           <Stack
             component="a"
             onClick={() => {
-              window.location.reload();
-              // navigate("/");
+              // window.location.reload();
+              navigate("/");
             }}
           >
             <Box
@@ -204,8 +210,15 @@ function CustomHeader(props) {
                   >
                     <MenuItem onClick={handleClose}>Editar Perfil</MenuItem>
                     <MenuItem onClick={handleClose}>Editar Endereço</MenuItem>
-                    <MenuItem onClick={handleClose}>Editar Anúncios</MenuItem>
-                    <MenuItem onClick={handleClose}>Sair</MenuItem>
+                    <MenuItem onClick={handleClose}>Meus Anúncios</MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        handleClose();
+                        logoutRedirect();
+                      }}
+                    >
+                      Sair
+                    </MenuItem>
                   </Menu>
                 </Stack>
               ) : (

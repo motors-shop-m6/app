@@ -5,7 +5,6 @@ export const VehiclesContext = createContext({});
 
 function VehicleProvider({ children }) {
   const [vehicles, setVehicles] = useState(null);
-  const loadVehicle = () => {};
   useEffect(() => {
     const loadVehicle = async () => {
       try {
@@ -20,7 +19,7 @@ function VehicleProvider({ children }) {
   }, []);
 
   return (
-    <VehiclesContext.Provider value={{ vehicles }}>
+    <VehiclesContext.Provider value={{ vehicles, setVehicles }}>
       {children}
     </VehiclesContext.Provider>
   );

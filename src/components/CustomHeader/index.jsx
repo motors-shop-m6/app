@@ -14,7 +14,7 @@ import {
 import { useContext, useEffect, useState } from "react";
 import motors_shop_logo from "../../assets/motors_shop_logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   buttonTransparent,
   buttonTransparentOutlined,
@@ -34,7 +34,15 @@ function CustomHeader(props) {
   });
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const { user, setToken, setId } = useContext(UserContext);
+  const { user, setToken, setId, setUser } = useContext(UserContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const topFunction = () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -56,10 +64,10 @@ function CustomHeader(props) {
     localStorage.clear();
     setToken("");
     setId("");
-    navigate("/");
+    setUser(null);
+    if (location.pathname === "/") return window.location.reload;
+    if (!user) navigate("/");
   };
-
-  const navigate = useNavigate();
 
   const screenWatcher = () => {
     setScreen({
@@ -140,7 +148,7 @@ function CustomHeader(props) {
           <Stack
             component="a"
             onClick={() => {
-              // window.location.reload();
+              topFunction();
               navigate("/");
             }}
           >

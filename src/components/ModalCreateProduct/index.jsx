@@ -3,9 +3,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  TextField,
   Stack,
-  Button,
   Typography,
   IconButton,
 } from "@mui/material";
@@ -114,7 +112,7 @@ function ModalCreateProduct(props) {
         toast.success("Veículo anunciado com sucesso");
         setVehicles([...vehicles, res.data]);
       })
-      .catch((err) => {
+      .catch(() => {
         toast.error("Dados inválidos, verifique os campos");
       });
     return response;

@@ -22,8 +22,9 @@ import {
 import CustomButton from "../CustomButton";
 import { UserContext } from "../../contexts/user/UserContext";
 import { stringAvatar } from "../../utils";
+import ModalEditUser from "../ModalEditUser";
 
-function CustomHeader(props) {
+function CustomHeader() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerActive, setDrawerActive] = useState(
     window.innerWidth > 750 ? false : true
@@ -143,6 +144,7 @@ function CustomHeader(props) {
         bgcolor: "grey.whiteFixed",
       }}
     >
+      <ModalEditUser open={false} />
       <Toolbar>
         <Stack px={5} sx={{ flexGrow: 5, px: { md: 4, lg: 5 } }}>
           <Stack

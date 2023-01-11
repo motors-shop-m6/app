@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { registerSchema } from "../schema";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -19,6 +20,7 @@ import CustomButton from "../components/CustomButton";
 import {
   buttonContainedPurple,
   buttonOutlinedLight,
+  buttonContainedPurpleButton,
 } from "../styles/buttonProps";
 import {
   nameInput,
@@ -35,11 +37,34 @@ import {
   complementInput,
   passwordInput,
   passwordConfirmInput,
-  typeUserInput,
 } from "../styles/inputRegister";
 
 function Register() {
   const navigate = useNavigate();
+
+  const [accountType, setAccountType] = useState("comprador");
+
+  const buyer = () => {
+    setAccountType("comprador");
+  };
+  const advertiser = () => {
+    setAccountType("anunciante");
+  };
+
+  const buttonBuyer = {
+    text: "Comprador",
+    function: buyer,
+    ...(accountType === "comprador"
+      ? { ...buttonContainedPurpleButton }
+      : { ...buttonOutlinedLight }),
+  };
+  const buttonAdvertiser = {
+    text: "Anunciante",
+    function: advertiser,
+    ...(accountType === "comprador"
+      ? { ...buttonOutlinedLight }
+      : { ...buttonContainedPurpleButton }),
+  };
 
   const {
     register,
@@ -141,13 +166,6 @@ function Register() {
     register: register("address.complement"),
   };
 
-  const typeUserInputProps = {
-    ...typeUserInput,
-    error: errors?.type_user ? true : false,
-    helperText: errors?.type_user && errors.type_user.message,
-    register: register("type_user"),
-  };
-
   const passwordInputProps = {
     ...passwordInput,
     error: errors?.password ? true : false,
@@ -164,7 +182,6 @@ function Register() {
 
   const onSubmitData = (data) => {
     delete data["passwordConfirm"];
-    console.log(data);
     const response = api
       .post("/user", data)
       .then((res) => {
@@ -176,6 +193,10 @@ function Register() {
       });
     return response;
   };
+
+  useEffect(() => {
+    register("type_user", { value: accountType });
+  }, [accountType]);
 
   return (
     <>
@@ -217,8 +238,10 @@ function Register() {
             Informações de endereço
           </Typography>
           <CustomInput {...cepInputProps} />
-          <CustomInput {...stateInputProps} />
-          <CustomInput {...cityInputProps} />
+          <Stack direction="row" spacing={2}>
+            <CustomInput {...stateInputProps} />
+            <CustomInput {...cityInputProps} />
+          </Stack>
           <CustomInput {...streetInputProps} />
           <CustomInput {...numberInputProps} />
           <CustomInput {...complementInputProps} />
@@ -227,7 +250,10 @@ function Register() {
             Tipo de conta
           </Typography>
 
-          <CustomInput {...typeUserInputProps} />
+          <Stack direction="row" spacing={2}>
+            <CustomButton {...buttonBuyer} />
+            <CustomButton {...buttonAdvertiser} />
+          </Stack>
 
           <CustomInput {...passwordInputProps} />
           <CustomInput {...passwordConfirmInputProps} />

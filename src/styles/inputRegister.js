@@ -83,13 +83,6 @@ export const complementInput = {
   variant: "outlined",
 };
 
-export const typeUserInput = {
-  fontWeight: 500,
-  placeholder: "Anunciante ou Comprador",
-  labelText: "Tipo de conta",
-  variant: "outlined",
-};
-
 export const passwordInput = {
   fontWeight: 500,
   placeholder: "Digitar senha",

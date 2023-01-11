@@ -1,17 +1,16 @@
 import CustomHeader from "../components/CustomHeader";
-
-import { Stack, Avatar } from "@mui/material";
-import { stringAvatar } from "../utils";
+import { Stack } from "@mui/material";
 import CustomFooter from "../components/CustomFooter";
 import Reviews from "../components/Reviews";
 import ReviewsAdd from "../components/ReviewsAdd";
 import Merdes from "../assets/mercedes.svg"
 import GridPicturesProduct from "../components/GridPicturesProduct";
+import DataProductAds from "../components/DataProductAds";
+import DescriptionVehicle from "../components/DescriptionVehicle";
+import InfoUserAds from "../components/InfoUserAds";
 
 function Product(props){
 
-   
-    
     return(
         <Stack
             sx={{
@@ -35,6 +34,7 @@ function Product(props){
                     sm: 7,
                     md: 13,
                   },
+                  width: '100%',
                 }}
             >
 
@@ -43,14 +43,25 @@ function Product(props){
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        width: '300px',
+                        width: {
+                            xs: 300,
+                            sm: '100%',
+                            md: '100%',
+                            lg: '70%',
+                        },
                         height: '355px',
                         
                         backgroundColor: 'grey.10',
                         borderRadius: '4px'
                     }}
                 >
-                    <img src={props.urlImg} /> {/*url da imagem principal.*/}
+                    <img 
+                        style={{
+                            width: '100%'
+                        }}
+                        src={props.urlImg} 
+                    /> 
+                        {/* url da imagem principal. */}
                 </Stack>
 
                 <Stack
@@ -59,115 +70,23 @@ function Product(props){
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'space-evenly',
-                        width: '300px',
+                        width: {
+                            xs: 300,
+                            sm: '100%',
+                            md: '100%',
+                            lg: '70%',
+                        },
                         height: '326.91px',
                         borderRadius: '4px',
                         backgroundColor: 'grey.10'
                     }}
                 >
-
-                    <Stack
-                        sx={{
-                            width: '280px',
-                            fontWeight: 600,
-                            fontSize: '20px',
-                            fontFamily: ''
-                        }}
-                    >
-                        {props.nameVehicle} {/*Nome do veículo.*/}
-                    </Stack>
-
-                    <Stack 
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            width: '280px'
-                        }}
-                    >
-                        <Stack
-                            sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                width: '50px',
-                                height: '32px',
-                                backgroundColor:'brand.4',
-
-                                fontSize: '14px',
-                                fontWeight: 500,
-                                fontFamily: 'Inter',
-                                lineHeight: '24px',
-                                color: 'brand.1',
-                            }}
-                        >
-                            {props.year} {/*Ano do automóvel.*/}
-                        </Stack>
-                        <Stack
-                            sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                width: '50px',
-                                height: '32px',
-                                marginLeft: '10px',
-                                backgroundColor:'brand.4',
-
-                                fontSize: '14px',
-                                fontWeight: 500,
-                                fontFamily: 'Inter',
-                                lineHeight: '24px',
-                                color: 'brand.1',
-
-                            }}
-                        >
-                            {props.km} KM {/*Quilômetros rodado.*/}
-                        </Stack>
-                    </Stack>
-
-                    <Stack
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'flex-start',
-                            width: '280px',
-
-                            fontFamily: '',
-                            fontWeight: 500,
-                            fontSize: '16px',
-                            lineHeight: '20px',
-
-                        }}
-                    >
-                        R$ {props.price} {/*Preço do automóvel*/}
-                    </Stack>
-
-                    <Stack 
-                        sx={{
-                            width:'280px',
-                            justifyContent:'flex-start',
-                        }}
-                    >
-
-                        <Stack 
-                            sx={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                width: '100px',
-                                height: '38px',
-                                backgroundColor: 'brand.1',
-                                borderRadius: '4px',
-
-                                fontFamily: 'Inter',
-                                fontWeight: 600,
-                                fontSize: '14px',
-                                color: 'grey.whiteFixed',
-                            }}
-                        >
-                            Comprar
-                        </Stack>
-                    
-                    </Stack>
-
+                    <DataProductAds
+                        nameVehicle={"Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200"}
+                        year={2013}
+                        km={0}
+                        price={"00.000,00"}
+                    />
                 </Stack>
 
 
@@ -178,40 +97,21 @@ function Product(props){
                         flexDirection: 'column',
                         justifyContent: 'space-evenly',
                         alignItems: 'center',
-                        width: '300px',
+                        width: {
+                            xs: '300px',
+                            sm: '80%',
+                            md: '75%',
+                            lg: '59%'
+                        },
                         height: '325px',
                         marginTop: '10px',
                         borderRadius: '4px',
                         backgroundColor: 'grey.whiteFixed',
                     }}
                 >
-                    <Stack
-                        sx={{
-                            width: '270px',
-                            fontFamily: '',
-                            fontWeight: 600,
-                            fontSize: '20px',
-                            lineHeight: '25px',
-                           
-                        }}
-                    >
-                        Descrição
-                    </Stack>
-
-                    <Stack
-                        sx={{
-                            width: '270px',
-                            height: '225px',
-
-                            fontFamily: 'Inter',
-                            fontWeight: 400,
-                            fontSize: '16px',
-                            lineHeight: '28px',
-                            color: 'grey.2'
-                        }}
-                    >
-                        {props.description} {/*Descrição do anúncio*/}
-                    </Stack>
+                    <DescriptionVehicle
+                        description={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
+                    />
                 </Stack>
 
                 <Stack
@@ -271,69 +171,22 @@ function Product(props){
                 }}
             >
 
-
-                <Avatar
-                    {...stringAvatar(`${props.advertiser}`)}
-                    sx={{
-                        backgroundColor: "brand.1",
-                        fontFamily: "Inter",
-                        color: "grey.whiteFixed",
-                    }}
+                <InfoUserAds
+                    advertiser={"Jhon Muller"}
+                    descAdvertiser={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's"}
                 />
-
-                <Stack
-                    sx={{
-                        fontFamily: '',
-                        fontWeight: 600,
-                        fontSize: '20px',
-                        lineHeight: '25px',
-                        color: 'grey.1',
-                    }}
-                >
-                    {props.advertiser} {/*Nome do anunciante.*/ }
-                </Stack>
-
-
-                <Stack
-                    sx={{
-                        width: '280px',
-                        fontSize: '16px',
-                        lineHeight: '28px',
-                        fontWeight: 400,
-                        fontFamily: 'Inter',
-                        color: 'grey.2',
-                    }}
-                >
-                    {props.descAdvertiser} {/*Descrição do anunciante.*/ }
-                    
-                </Stack>
-
-
-                <Stack
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        width: '206px',
-                        height: '48px',
-                        backgroundColor: 'grey.0',
-                        borderRadius: '4px',
-                        color: 'grey.whiteFixed',
-
-                        fontFamily: 'Inter',
-                        fontWeight: 600,
-                        fontSize: '16px',
-                        
-                    }}
-                >
-                    Ver todos os anúncios
-                </Stack>
+                
             </Stack>
 
             <Stack
                 sx={{
                     alignItems: 'center',
-                    width: '300px',
+                    width: {
+                        xs: '300px',
+                        sm: '80%',
+                        md: '75%',
+                        lg: '59%'
+                    },
                     height: '850px',
                     backgroundColor: 'grey.10',
                     marginTop: '10px',
@@ -349,7 +202,7 @@ function Product(props){
                         lineHeight: '25px',
 
                         marginTop: '30px',
-                        width: '280px',
+                        width: '90%'
                     }}
                 >
                     Comentários
@@ -375,14 +228,19 @@ function Product(props){
             <Stack
                 sx={{
                     alignItems: 'center',
-                    width: '300px',
+                    width: {
+                        xs: '300px',
+                        sm: '80%',
+                        md: '75%',
+                        lg: '59%'
+                    },
                     height: '350px',
                     backgroundColor: 'grey.10',
                     marginTop: '10px',
                     borderRadius: '4px',
                 }}
             >
-                <ReviewsAdd user={"Jhon Muller"}   />
+                <ReviewsAdd user={"Jhon Muller"} />
             </Stack>
 
             <CustomFooter/>

@@ -4,12 +4,11 @@ import { stringAvatar } from "../../utils";
 
 function ReviewsAdd(props) {
 
-
     return (
-        <Stack>
+        <>
             <Stack
                 sx={{
-                    width: '280px',
+                    width: '90%',
                     margin: '30px 0 30px 0',
                     flexDirection: 'row',
                     alignItems: 'center',
@@ -41,11 +40,13 @@ function ReviewsAdd(props) {
                 label="Comentário"
                 multiline
                 rows={4}
+                sx={{
+                    width: '90%'
+                }}
             />
 
             <Stack
                 sx={{
-
                     alignItems: 'center',
                     justifyContent: 'center',
                     width: '108px',
@@ -64,7 +65,7 @@ function ReviewsAdd(props) {
                 Comentar
             </Stack>
            
-        </Stack>
+        </>
     )
 }
 

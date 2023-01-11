@@ -7,7 +7,8 @@ function Reviews(props) {
         <Stack
             sx={{
                 marginTop: '30px',
-                width: '280px',
+                // width: '280px',
+                width: '90%'
             }}
         >
 

@@ -7,7 +7,9 @@ function CustomProduct(props) {
   const navigate = useNavigate();
 
   const clickAds = () =>{
-    console.log(props)
+    localStorage.removeItem("@motors_shop:dataProduct")
+    localStorage.setItem("@motors_shop:dataProduct", JSON.stringify(props) )
+    navigate("/product")
   }
 
   return (
@@ -30,7 +32,6 @@ function CustomProduct(props) {
       }}
 
       onClick= {()=>{
-        // navigate("/product")
         clickAds()
       }}
     >

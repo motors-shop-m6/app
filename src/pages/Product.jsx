@@ -65,7 +65,8 @@ function Product(){
                 >
                     <img 
                         style={{
-                            width: '100%'
+                            width: '100%',
+                            height: '100%'
                         }}
                         src={dataProduct.urlImg} 
                     /> 

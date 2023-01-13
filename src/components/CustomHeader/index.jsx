@@ -14,7 +14,7 @@ import {
 import { useContext, useEffect, useState } from "react";
 import motors_shop_logo from "../../assets/motors_shop_logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   buttonTransparent,
   buttonTransparentOutlined,
@@ -22,8 +22,9 @@ import {
 import CustomButton from "../CustomButton";
 import { UserContext } from "../../contexts/user/UserContext";
 import { stringAvatar } from "../../utils";
+import ModalEditUser from "../ModalEditUser";
 
-function CustomHeader(props) {
+function CustomHeader() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerActive, setDrawerActive] = useState(
     window.innerWidth > 750 ? false : true
@@ -33,8 +34,26 @@ function CustomHeader(props) {
     winHeight: window.innerHeight,
   });
   const [anchorEl, setAnchorEl] = useState(null);
+  const [modalEdit, setModalEdit] = useState(false);
+
+  const activateModalEdit = () => {
+    setModalEdit(true);
+  };
+  const deactivateModalEdit = () => {
+    setModalEdit(false);
+  };
+
   const open = Boolean(anchorEl);
-  const { user, setToken, setId } = useContext(UserContext);
+  const { user, setToken, setId, setUser } = useContext(UserContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const topFunction = () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    navigate("/");
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -56,10 +75,10 @@ function CustomHeader(props) {
     localStorage.clear();
     setToken("");
     setId("");
+    setUser(null);
+    if (location.pathname === "/") return window.location.reload;
     navigate("/");
   };
-
-  const navigate = useNavigate();
 
   const screenWatcher = () => {
     setScreen({
@@ -135,13 +154,13 @@ function CustomHeader(props) {
         bgcolor: "grey.whiteFixed",
       }}
     >
+      <ModalEditUser open={modalEdit} handleClose={deactivateModalEdit} />
       <Toolbar>
         <Stack px={5} sx={{ flexGrow: 5, px: { md: 4, lg: 5 } }}>
           <Stack
             component="a"
             onClick={() => {
-              // window.location.reload();
-              navigate("/");
+              topFunction();
             }}
           >
             <Box
@@ -208,7 +227,14 @@ function CustomHeader(props) {
                     open={open}
                     onClose={handleClose}
                   >
-                    <MenuItem onClick={handleClose}>Editar Perfil</MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        handleClose();
+                        activateModalEdit();
+                      }}
+                    >
+                      Editar Perfil
+                    </MenuItem>
                     <MenuItem onClick={handleClose}>Editar Endereço</MenuItem>
                     <MenuItem onClick={handleClose}>Meus Anúncios</MenuItem>
                     <MenuItem

@@ -60,7 +60,7 @@ export const registerSchema = yup.object().shape({
     .required("Confirme a senha")
     .oneOf([yup.ref("password")], "As senhas não são iguais!")
     .max(20),
-  })
+});
 
 export const createProductSchema = yup.object().shape({
   title: yup
@@ -92,4 +92,104 @@ export const createProductSchema = yup.object().shape({
     .max(200, "Máximo de 200 caracteres")
     .required("Campo obrigatório"),
   images: yup.array(),
+});
+
+export const editUserSchema = yup.object().shape({
+  name: yup
+    .string()
+    .nullable(true)
+    .notRequired()
+    .transform((value) => {
+      if (
+        value &&
+        Object.values(value).some(
+          (v) => !(v === null || v === undefined || v === "")
+        )
+      ) {
+        return value;
+      }
+      return undefined;
+    })
+    .max(100),
+  email: yup
+    .string()
+    .email("Email inválido")
+    .nullable(true)
+    .notRequired()
+    .transform((value) => {
+      if (
+        value &&
+        Object.values(value).some(
+          (v) => !(v === null || v === undefined || v === "")
+        )
+      ) {
+        return value;
+      }
+      return undefined;
+    })
+    .max(127),
+  cpf: yup
+    .string()
+    .nullable(true)
+    .notRequired()
+    .transform((value) => {
+      if (
+        value &&
+        Object.values(value).some(
+          (v) => !(v === null || v === undefined || v === "")
+        )
+      ) {
+        return value;
+      }
+      return undefined;
+    })
+    .test(
+      "len",
+      "Informe seu CPF apenas com números.",
+      (val) => val.length === 11
+    ),
+  password: yup
+    .string()
+    .matches(
+      /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
+      "A senha deve conter ao menos um símbolo, letras, números e ter no mínimo 8 caracteres!"
+    )
+    .max(255),
+  phone: yup
+    .string()
+    .max(20)
+    .nullable(true)
+    .notRequired()
+    .transform((value) => {
+      if (
+        value &&
+        Object.values(value).some(
+          (v) => !(v === null || v === undefined || v === "")
+        )
+      ) {
+        return value;
+      }
+      return undefined;
+    })
+    .matches(/^[1-9]{2} (?:[2-8]|9[1-9])[0-9]{3}-[0-9]{4}$/, "11 99000-0000"),
+  birthDate: yup
+    .string()
+    .matches(/([0-2][0-9]|3[0-1])\/(0[0-9]|1[0-2])\/[0-9]{4}/, "00/00/0000")
+    .max(10),
+  description: yup
+    .string()
+    .nullable(true)
+    .notRequired()
+    .transform((value) => {
+      if (
+        value &&
+        Object.values(value).some(
+          (v) => !(v === null || v === undefined || v === "")
+        )
+      ) {
+        return value;
+      }
+      return undefined;
+    })
+    .max(255),
 });

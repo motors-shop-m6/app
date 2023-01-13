@@ -8,8 +8,14 @@ import GridPicturesProduct from "../components/GridPicturesProduct";
 import DataProductAds from "../components/DataProductAds";
 import DescriptionVehicle from "../components/DescriptionVehicle";
 import InfoUserAds from "../components/InfoUserAds";
+import { useContext } from "react";
+import { UserContext } from "../contexts/user/UserContext";
 
-function Product(props){
+function Product(){
+
+    const dataProduct = JSON.parse(localStorage.getItem('@motors_shop:dataProduct'))
+    const { user } = useContext(UserContext);
+    console.log(user)
 
     const dataProduct = JSON.parse(localStorage.getItem('@motors_shop:dataProduct'))
 
@@ -190,7 +196,7 @@ function Product(props){
             >
 
                 <InfoUserAds
-                    advertiser={"Nome Anuciante"}
+                    advertiser={dataProduct.nameSeller}
                     descAdvertiser={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's"}
                 />
                 
@@ -258,7 +264,12 @@ function Product(props){
                     borderRadius: '4px',
                 }}
             >
-                <ReviewsAdd user={"Nome Usuário"} />
+                {
+                    user === null?
+                    <ReviewsAdd user={"Faça Login"} />:
+                    <ReviewsAdd user={`${user.name}`} />
+                }
+                
             </Stack>
 
             <CustomFooter/>

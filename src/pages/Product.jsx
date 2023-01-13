@@ -14,7 +14,8 @@ import { UserContext } from "../contexts/user/UserContext";
 function Product(){
 
     const dataProduct = JSON.parse(localStorage.getItem('@motors_shop:dataProduct'))
-    const { user } = useContext(UserContext);    
+    const { user } = useContext(UserContext);
+    console.log(user)
 
     return(
         <Stack
@@ -261,7 +262,12 @@ function Product(){
                     borderRadius: '4px',
                 }}
             >
-                <ReviewsAdd user={`${user.name}`} />
+                {
+                    user === null?
+                    <ReviewsAdd user={"Faça Login"} />:
+                    <ReviewsAdd user={`${user.name}`} />
+                }
+                
             </Stack>
 
             <CustomFooter/>

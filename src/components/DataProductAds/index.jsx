@@ -100,6 +100,9 @@ function DataProductAds(props){
                         fontWeight: 600,
                         fontSize: '14px',
                         color: 'grey.whiteFixed',
+                        '&:hover':{
+                            cursor: 'pointer'
+                        }
                     }}
                 >
                     Comprar

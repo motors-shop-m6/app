@@ -1,7 +1,10 @@
 import { stringAvatar } from "../../utils";
 import { Stack, Avatar } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function InfoUserAds(props){
+
+    const navigate = useNavigate()
 
     return(
         <>
@@ -55,8 +58,17 @@ function InfoUserAds(props){
                     fontFamily: 'Inter',
                     fontWeight: 600,
                     fontSize: '16px',
+
+                    '&:hover':{
+                        cursor: 'pointer'
+                    }
                     
                 }}
+
+                onClick={()=>{
+                    navigate("/")
+                }}
+
             >
                 Ver todos os anúncios
             </Stack>

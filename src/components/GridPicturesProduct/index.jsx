@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-
+import Merdes from "../../assets/mercedes.svg"
 
 function GridPicturesProduct (props){
 
@@ -10,7 +10,12 @@ function GridPicturesProduct (props){
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent:'space-between',
-                width: '280px',
+                width: {
+                    xs: '280px',
+                    sm: '80%',
+                    md: '75%',
+                    lg: '80%'
+                },
                 marginTop: '10px',
             }}
         >
@@ -21,8 +26,14 @@ function GridPicturesProduct (props){
                     justifyContent: 'center',
                     alignItems: 'center',
                     backgroundColor: 'grey.7',
-                    width: '90px',
                     height: '90px',
+                    width: {
+                        xs: '90px',
+                        sm: '30%',
+                        md: '25%',
+                        lg: '25%',
+                    },
+
                     borderRadius: '4px',
                 }}
             >
@@ -42,7 +53,12 @@ function GridPicturesProduct (props){
                     justifyContent: 'center',
                     alignItems: 'center',
                     backgroundColor: 'grey.7',
-                    width: '90px',
+                    width: {
+                        xs: '90px',
+                        sm: '30%',
+                        md: '25%',
+                        lg: '25%',
+                    },
                     height: '90px',
                     borderRadius: '4px',
                 }}
@@ -63,7 +79,12 @@ function GridPicturesProduct (props){
                     justifyContent: 'center',
                     alignItems: 'center',
                     backgroundColor: 'grey.7',
-                    width: '90px',
+                    width: {
+                        xs: '90px',
+                        sm: '30%',
+                        md: '25%',
+                        lg: '25%',
+                    },
                     height: '90px',
                     borderRadius: '4px',
                 }}

@@ -32,7 +32,7 @@ function DescriptionVehicle(props){
                     color: 'grey.2'
                 }}
             >
-                            {props.description} {/*Descrição do anúncio */}
+                            {props.descriptionVehicle} {/*Descrição do anúncio */}
                             
             </Stack>
         </>

@@ -59,9 +59,9 @@ function Product(props){
                         style={{
                             width: '100%'
                         }}
-                        src={props.urlImg} 
+                        src={props.coverImage} 
                     /> 
-                        {/* url da imagem principal. */}
+                        {/* url da imagem principal. (coverImage) */}
                 </Stack>
 
                 <Stack
@@ -82,10 +82,10 @@ function Product(props){
                     }}
                 >
                     <DataProductAds
-                        nameVehicle={"Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200"}
-                        year={2013}
-                        km={0}
-                        price={"00.000,00"}
+                        nameVehicle={props.title}
+                        year={props.year}
+                        km={props.km}
+                        price={props.price}
                     />
                 </Stack>
 
@@ -110,7 +110,7 @@ function Product(props){
                     }}
                 >
                     <DescriptionVehicle
-                        description={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
+                        descriptionVehicle={props.description}
                     />
                 </Stack>
 
@@ -126,7 +126,12 @@ function Product(props){
                         marginTop: '10px',
                         backgroundColor: 'grey.whiteFixed',
                         height: '359px',
-                        width: '300px',
+                        width: {
+                            xs: '300px',
+                            sm: '80%',
+                            md: '75%',
+                            lg: '59%'
+                        },
                     }}
                 >
                     <Stack
@@ -136,22 +141,28 @@ function Product(props){
                             fontSize: '20px',
                             lineHeight: '25px',
 
-                            width: '280px'
+                            width: {
+                                xs: '300px',
+                                sm: '80%',
+                                md: '75%',
+                                lg: '80%'
+                            },
+                            
                         }}
                     >
                         Fotos
                     </Stack>
 
                     <GridPicturesProduct
-                        pictureOne={props.pic1}
-                        pictureTwo={props.pic2}
-                        pictureThree={props.pic3}
+                        pictureOne={Merdes}
+                        pictureTwo={Merdes}
+                        pictureThree={Merdes}
                     />
 
                     <GridPicturesProduct
-                        pictureOne={props.pic4}
-                        pictureTwo={props.pic5}
-                        pictureThree={props.pic6}
+                        pictureOne={Merdes}
+                        pictureTwo={Merdes}
+                        pictureThree={Merdes}
                     />
 
                 </Stack>
@@ -162,8 +173,13 @@ function Product(props){
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'space-evenly',
-                    
-                    width: '300px',
+
+                    width: {
+                        xs: '300px',
+                        sm: '80%',
+                        md: '75%',
+                        lg: '59%'
+                    },
                     height: '398px',
                     marginTop: '10px',
                     backgroundColor: 'grey.whiteFixed',
@@ -172,7 +188,7 @@ function Product(props){
             >
 
                 <InfoUserAds
-                    advertiser={"Jhon Muller"}
+                    advertiser={"Nome Anuciante"}
                     descAdvertiser={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's"}
                 />
                 
@@ -209,17 +225,17 @@ function Product(props){
                 </Stack>
 
                 <Reviews 
-                    name={"Jhon Muller"} 
+                    name={"Fulano Cliente"} 
                     review={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."} 
                 />
 
                 <Reviews 
-                    name={"Jhon Muller"} 
+                    name={"Ciclano Cliente"} 
                     review={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."} 
                 />
 
                 <Reviews 
-                    name={"Jhon Muller"} 
+                    name={"Deutrano Cliente"} 
                     review={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."} 
                 />
                 
@@ -240,7 +256,7 @@ function Product(props){
                     borderRadius: '4px',
                 }}
             >
-                <ReviewsAdd user={"Jhon Muller"} />
+                <ReviewsAdd user={"Nome Usuário"} />
             </Stack>
 
             <CustomFooter/>

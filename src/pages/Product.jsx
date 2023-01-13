@@ -11,6 +11,8 @@ import InfoUserAds from "../components/InfoUserAds";
 
 function Product(props){
 
+    const dataProduct = JSON.parse(localStorage.getItem('@motors_shop:dataProduct'))
+
     return(
         <Stack
             sx={{
@@ -59,7 +61,7 @@ function Product(props){
                         style={{
                             width: '100%'
                         }}
-                        src={props.coverImage} 
+                        src={dataProduct.urlImg} 
                     /> 
                         {/* url da imagem principal. (coverImage) */}
                 </Stack>
@@ -82,10 +84,10 @@ function Product(props){
                     }}
                 >
                     <DataProductAds
-                        nameVehicle={props.title}
-                        year={props.year}
-                        km={props.km}
-                        price={props.price}
+                        nameVehicle={dataProduct.nameVehicle}
+                        year={dataProduct.year}
+                        km={dataProduct.km}
+                        price={dataProduct.price}
                     />
                 </Stack>
 
@@ -110,7 +112,7 @@ function Product(props){
                     }}
                 >
                     <DescriptionVehicle
-                        descriptionVehicle={props.description}
+                        descriptionVehicle={dataProduct.description}
                     />
                 </Stack>
 
@@ -154,15 +156,15 @@ function Product(props){
                     </Stack>
 
                     <GridPicturesProduct
-                        pictureOne={Merdes}
-                        pictureTwo={Merdes}
-                        pictureThree={Merdes}
+                        pictureOne={dataProduct.urlImg}
+                        pictureTwo={dataProduct.urlImg}
+                        pictureThree={dataProduct.urlImg}
                     />
 
                     <GridPicturesProduct
-                        pictureOne={Merdes}
-                        pictureTwo={Merdes}
-                        pictureThree={Merdes}
+                        pictureOne={dataProduct.urlImg}
+                        pictureTwo={dataProduct.urlImg}
+                        pictureThree={dataProduct.urlImg}
                     />
 
                 </Stack>

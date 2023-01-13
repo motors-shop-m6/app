@@ -1,7 +1,15 @@
 import { Box, Container, Avatar, Stack } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { stringAvatar } from "../../utils";
 
 function CustomProduct(props) {
+
+  const navigate = useNavigate();
+
+  const clickAds = () =>{
+    console.log(props)
+  }
+
   return (
     <Box
       sx={{
@@ -16,6 +24,14 @@ function CustomProduct(props) {
           xs: 0,
           md: 0,
         },
+        '&:hover':{
+          cursor: 'pointer'
+        },
+      }}
+
+      onClick= {()=>{
+        // navigate("/product")
+        clickAds()
       }}
     >
       <Stack
@@ -49,6 +65,7 @@ function CustomProduct(props) {
         }}
       >
         <p>{props.nameVehicle}</p>
+        
       </Container>
 
       <Container

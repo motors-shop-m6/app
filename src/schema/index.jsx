@@ -95,12 +95,59 @@ export const createProductSchema = yup.object().shape({
 });
 
 export const editUserSchema = yup.object().shape({
-  name: yup.string().max(100),
-  email: yup.string().email("Email inválido").max(127),
+  name: yup
+    .string()
+    .nullable(true)
+    .notRequired()
+    .transform((value) => {
+      if (
+        value &&
+        Object.values(value).some(
+          (v) => !(v === null || v === undefined || v === "")
+        )
+      ) {
+        return value;
+      }
+      return undefined;
+    })
+    .max(100),
+  email: yup
+    .string()
+    .email("Email inválido")
+    .nullable(true)
+    .notRequired()
+    .transform((value) => {
+      if (
+        value &&
+        Object.values(value).some(
+          (v) => !(v === null || v === undefined || v === "")
+        )
+      ) {
+        return value;
+      }
+      return undefined;
+    })
+    .max(127),
   cpf: yup
     .string()
-    .matches(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, "Formato do CPF: 000.000.000-00.")
-    .max(15),
+    .nullable(true)
+    .notRequired()
+    .transform((value) => {
+      if (
+        value &&
+        Object.values(value).some(
+          (v) => !(v === null || v === undefined || v === "")
+        )
+      ) {
+        return value;
+      }
+      return undefined;
+    })
+    .test(
+      "len",
+      "Informe seu CPF apenas com números.",
+      (val) => val.length === 11
+    ),
   password: yup
     .string()
     .matches(
@@ -110,11 +157,39 @@ export const editUserSchema = yup.object().shape({
     .max(255),
   phone: yup
     .string()
-    .matches(/^[1-9]{2} (?:[2-8]|9[1-9])[0-9]{3}-[0-9]{4}$/, "11 99000-0000")
-    .max(20),
+    .max(20)
+    .nullable(true)
+    .notRequired()
+    .transform((value) => {
+      if (
+        value &&
+        Object.values(value).some(
+          (v) => !(v === null || v === undefined || v === "")
+        )
+      ) {
+        return value;
+      }
+      return undefined;
+    })
+    .matches(/^[1-9]{2} (?:[2-8]|9[1-9])[0-9]{3}-[0-9]{4}$/, "11 99000-0000"),
   birthDate: yup
     .string()
     .matches(/([0-2][0-9]|3[0-1])\/(0[0-9]|1[0-2])\/[0-9]{4}/, "00/00/0000")
     .max(10),
-  description: yup.string().max(255),
+  description: yup
+    .string()
+    .nullable(true)
+    .notRequired()
+    .transform((value) => {
+      if (
+        value &&
+        Object.values(value).some(
+          (v) => !(v === null || v === undefined || v === "")
+        )
+      ) {
+        return value;
+      }
+      return undefined;
+    })
+    .max(255),
 });

@@ -16,22 +16,26 @@ import {
   buttonContainedPurple,
   buttonNoBorder,
 } from "../../styles/buttonProps";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import ModalText from "../ModalText";
 import CustomInput from "../CustomInput";
 import { api } from "../../api/api";
 import { VehiclesContext } from "../../contexts/vehicles/VehiclesContext";
 import { UserContext } from "../../contexts/user/UserContext";
+import { editUserSchema } from "../../schema";
 
 function ModalEditUser(props) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver() });
+  } = useForm({ resolver: yupResolver(editUserSchema) });
+
+  const [dataObj, setDataObj] = useState({});
+  const [keyArr, setKeyArr] = useState([]);
 
   const { vehicles, setVehicles } = useContext(VehiclesContext);
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const buttonGrey = {
     ...buttonNoBorder,
@@ -46,25 +50,37 @@ function ModalEditUser(props) {
       md: ".7rem 4rem",
       lg: ".7rem 4rem",
     },
-    ...(!errors && { function: props.handleClose }),
+    function: props.handleClose,
   };
 
   const onSubmitData = (data) => {
+    for (let key in data) {
+      if (data[key].length === 0) {
+        setKeyArr([...keyArr, key]);
+      }
+    }
+    keyArr.forEach((element) => {
+      delete data[element];
+    });
+    setKeyArr([]);
+
+    if (Object.keys(data).length === 0) {
+      toast.warning("Nenhum dado foi modificado");
+      return false;
+    }
+
     const response = api
-      .post("/advertisement", data)
+      .patch(`/user/${user?.id}`, data)
       .then((res) => {
-        toast.success("Veículo anunciado com sucesso");
-        setVehicles([...vehicles, res.data]);
+        toast.success("Dados alterados com sucesso");
+        setUser(res.data);
       })
       .catch(() => {
         toast.error("Dados inválidos, verifique os campos");
       });
     return response;
   };
-
-  useEffect(() => {}, []);
-
-  console.log(user);
+  // console.log(Object.keys(errors).length && errors.constructor);
 
   return (
     <Dialog

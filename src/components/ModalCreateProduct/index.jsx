@@ -101,7 +101,7 @@ function ModalCreateProduct(props) {
       md: ".7rem 4rem",
       lg: ".7rem 4rem",
     },
-    ...(!errors && { function: props.handleClose }),
+    ...(errors.length !== undefined && { function: props.handleClose }),
   };
 
   const onSubmitData = (data) => {

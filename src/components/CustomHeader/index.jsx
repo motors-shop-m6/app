@@ -34,6 +34,15 @@ function CustomHeader() {
     winHeight: window.innerHeight,
   });
   const [anchorEl, setAnchorEl] = useState(null);
+  const [modalEdit, setModalEdit] = useState(false);
+
+  const activateModalEdit = () => {
+    setModalEdit(true);
+  };
+  const deactivateModalEdit = () => {
+    setModalEdit(false);
+  };
+
   const open = Boolean(anchorEl);
   const { user, setToken, setId, setUser } = useContext(UserContext);
 
@@ -145,7 +154,7 @@ function CustomHeader() {
         bgcolor: "grey.whiteFixed",
       }}
     >
-      <ModalEditUser open={false} />
+      <ModalEditUser open={modalEdit} handleClose={deactivateModalEdit} />
       <Toolbar>
         <Stack px={5} sx={{ flexGrow: 5, px: { md: 4, lg: 5 } }}>
           <Stack
@@ -218,7 +227,14 @@ function CustomHeader() {
                     open={open}
                     onClose={handleClose}
                   >
-                    <MenuItem onClick={handleClose}>Editar Perfil</MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        handleClose();
+                        activateModalEdit();
+                      }}
+                    >
+                      Editar Perfil
+                    </MenuItem>
                     <MenuItem onClick={handleClose}>Editar Endereço</MenuItem>
                     <MenuItem onClick={handleClose}>Meus Anúncios</MenuItem>
                     <MenuItem
